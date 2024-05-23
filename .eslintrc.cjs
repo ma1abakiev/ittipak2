@@ -9,6 +9,21 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh'],
+  settings: {
+    'import/resolver': {
+      alias: {
+        map: [
+          ['~app', './src/app'],
+          ['~entities', './src/entities'],
+          ['~features', './src/features'],
+          ['~pages', './src/pages'],
+          ['~shared', './src/shared'],
+          ['~widgets', './src/widgets'],
+        ],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+      },
+    },
+  },
   rules: {
     'react-refresh/only-export-components': [
       'warn',

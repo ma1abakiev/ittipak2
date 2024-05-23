@@ -9,6 +9,20 @@ export const pathKeys = {
   login() {
     return pathKeys.root.concat('login/')
   },
+  verify: {
+    root() {
+      return pathKeys.root.concat('#/activate/')
+    },
+    byId(params: { uid: string; token: string }) {
+      return pathKeys.article.root().concat(params.uid, '/', params.token, '/')
+    },
+  },
+  feed() {
+    return pathKeys.root.concat('feed/')
+  },
+  favorites() {
+    return pathKeys.root.concat('favorites/')
+  },
   page404() {
     return pathKeys.root.concat('404/')
   },
@@ -23,5 +37,14 @@ export const pathKeys = {
       return pathKeys.article.root().concat('edit/', String(params.id), '/')
     },
   },
-  
+  editor: {
+    root() {
+      return pathKeys.root.concat('editor/')
+    },
+  },
+  profile: {
+    root() {
+      return pathKeys.root.concat('profile/')
+    },
+  },
 }

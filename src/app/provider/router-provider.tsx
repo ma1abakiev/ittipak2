@@ -1,16 +1,19 @@
-import { GenericLayout, NakedLayout } from '~pages/layouts/index'
 import {
   RouterProvider,
   createBrowserRouter,
   redirect,
   useRouteError,
 } from 'react-router-dom'
-import { articlePageRoute } from '~pages/article/article-page.route'
-import { homePageRoute } from '~pages/home/home-page.route'
-import { loginPageRoute } from '~pages/login/login-page.route'
-import { registerPageRoute } from '~pages/register/register-page.route'
 import { pathKeys } from '~shared/lib/react-router'
-import { page404Route } from '~pages/page-404/page-404.route'
+import { GenericLayout, IntroLayout, NakedLayout } from '~pages/layouts'
+import { homePageRoute } from '~pages/home'
+import { articlePageRoute } from '~pages/article'
+import { loginPageRoute } from '~pages/login'
+import { registerPageRoute } from '~pages/register'
+import { page404Route } from '~pages/page-404'
+import { verifyPageRoute } from '~pages/verify'
+import { profilePageRoute } from '~pages/profile'
+import { editorPageRoute } from '~pages/editor'
 
 function BubbleError() {
   const error = useRouteError()
@@ -27,13 +30,17 @@ const router = createBrowserRouter([
         children: [
           articlePageRoute,
           homePageRoute,
-          loginPageRoute,
-          registerPageRoute,
+          profilePageRoute,
+          editorPageRoute,
         ],
       },
       {
         element: <NakedLayout></NakedLayout>,
         children: [page404Route],
+      },
+      {
+        element: <IntroLayout />,
+        children: [registerPageRoute, loginPageRoute, verifyPageRoute],
       },
       {
         loader: async () => redirect(pathKeys.page404()),
