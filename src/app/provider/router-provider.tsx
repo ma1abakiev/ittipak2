@@ -13,7 +13,8 @@ import { registerPageRoute } from '~pages/register'
 import { page404Route } from '~pages/page-404'
 import { verifyPageRoute } from '~pages/verify'
 import { profilePageRoute } from '~pages/profile'
-import { editorPageRoute } from '~pages/editor'
+import { sandboxPageRoute } from '~pages/sandbox'
+import { favoritesPageRoute } from '~pages/favorites'
 
 function BubbleError() {
   const error = useRouteError()
@@ -28,10 +29,11 @@ const router = createBrowserRouter([
       {
         element: <GenericLayout></GenericLayout>,
         children: [
-          articlePageRoute,
           homePageRoute,
+          articlePageRoute,
           profilePageRoute,
-          editorPageRoute,
+          sandboxPageRoute,
+          favoritesPageRoute
         ],
       },
       {

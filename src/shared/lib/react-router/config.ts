@@ -39,7 +39,7 @@ export const pathKeys = {
   },
   editor: {
     root() {
-      return pathKeys.root.concat('editor/')
+      return pathKeys.root.concat('sandbox/')
     },
   },
   profile: {

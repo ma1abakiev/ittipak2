@@ -1,12 +1,16 @@
 import { Typography } from '@mui/material'
 import { Outlet } from 'react-router-dom'
+import { getCookie } from 'typescript-cookie'
+import { GuestBar } from '~widgets/guest-bar'
 import { Intro } from '~widgets/intro'
 import { TopBar } from '~widgets/top-bar'
 
 export const GenericLayout = () => {
+  const isAuth = getCookie('access')
+
   return (
     <>
-      <TopBar></TopBar>
+      {isAuth ? <TopBar /> : <GuestBar />}
       <Intro>
         <Typography className="text-4xl text-uygur" color={'primary'}>
           Уйгурский новостной портал

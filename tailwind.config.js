@@ -14,6 +14,7 @@ export default {
       uygur: '#549DE2',
       white: '#FEFEFE',
       black: '#020617',
+      
     },
     extend: {},
   },

@@ -11,3 +11,7 @@
 body {
   background-color: #fefefe;
 }
+.slash-menu-item:hover,
+.slash-menu-item.selected {
+  background-color: lightgray;
+}

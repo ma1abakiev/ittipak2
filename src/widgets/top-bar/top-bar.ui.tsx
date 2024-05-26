@@ -63,6 +63,7 @@ export function TopBar() {
     removeCookie('refresh')
     navigate(`${pathKeys.home()}`)
     userQueries.userService.removeCache()
+    window.location.reload() // Обновить страницу
   }
 
   return (
@@ -131,7 +132,6 @@ export function TopBar() {
                 <Button
                   onClick={() => navigate(pathKeys.editor.root())}
                   size="small"
-                  // className="border-pc-400 text-pc-400  hover:bg-second-100 hover:text-[white]"
                   variant="outlined"
                   endIcon={<EditIcon />}
                   className="border-white text-white"

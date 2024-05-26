@@ -1,65 +1,70 @@
 import {
   DefaultReactSuggestionItem,
   SuggestionMenuProps,
-} from '@blocknote/react';
-import { useEffect, useRef } from 'react';
+} from '@blocknote/react'
+import { Paper } from '@mui/material'
+import { useEffect, useRef } from 'react'
 
 function getTranslatedText(title: string): string {
   switch (title) {
     case 'Heading 1':
-      return 'Заголовок 1';
+      return 'Заголовок 1'
     case 'Heading 2':
-      return 'Заголовок 2';
+      return 'Заголовок 2'
     case 'Heading 3':
-      return 'Заголовок 3';
+      return 'Заголовок 3'
     case 'Numbered List':
-      return 'Нумерованный список';
+      return 'Нумерованный список'
     case 'Bullet List':
-      return 'Маркированный список';
+      return 'Маркированный список'
     case 'Paragraph':
-      return 'Параграф';
+      return 'Параграф'
     case 'Table':
-      return 'Таблица';
+      return 'Таблица'
     case 'Image':
-      return 'Изображение';
+      return 'Изображение'
     default:
-      return title;
+      return title
   }
 }
 
 export function CustomSlashMenu(
   props: SuggestionMenuProps<DefaultReactSuggestionItem>
 ) {
-  const menuRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (props.selectedIndex !== undefined && menuRef.current) {
       const selectedElement = menuRef.current.childNodes[
         props.selectedIndex
-      ] as HTMLElement;
+      ] as HTMLElement
       if (selectedElement) {
         selectedElement.scrollIntoView({
           behavior: 'smooth',
           block: 'nearest',
-        });
+        })
       }
     }
-  }, [props.selectedIndex]);
+  }, [props.selectedIndex])
 
   return (
-    <div className="slash-menu bg-none max-h-48 overflow-y-auto" ref={menuRef}>
+    <Paper
+      elevation={2}
+      className="slash-menu bg-green max-h-48 overflow-y-auto "
+      ref={menuRef}
+    >
       {props.items.map((item, index) => (
         <div
           key={index}
-          className={`slash-menu-item border-b border-b-second-100/40 p-3 ${
-            props.selectedIndex === index ? 'selected bg-second-100/40' : ''
+          className={`slash-menu-item border-b border-b-uygur p-3  cursor-pointer bg-white  ${
+            props.selectedIndex === index ? 'selected bg-uygur/25' : ''
           }`}
           onClick={() => {
-            props.onItemClick?.(item);
+            props.onItemClick?.(item)
           }}
         >
           <div className="flex items-center gap-2">
-            <div className="bg-second-100 p-1 rounded slash-icon text-[white]">
+            <div className="bg-uygur p-1 rounded slash-icon text-[white]">
               {item.icon}
             </div>
             <div className="text-md text-sm font-medium font-serif">
@@ -68,6 +73,6 @@ export function CustomSlashMenu(
           </div>
         </div>
       ))}
-    </div>
-  );
+    </Paper>
+  )
 }

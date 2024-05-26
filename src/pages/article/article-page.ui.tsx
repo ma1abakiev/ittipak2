@@ -1,74 +1,68 @@
+import { CircularProgress, Container, Divider } from '@mui/material'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import Card from '@mui/material/Card'
-import CardActions from '@mui/material/CardActions'
-import CardContent from '@mui/material/CardContent'
-import CardMedia from '@mui/material/CardMedia'
-import Typography from '@mui/material/Typography'
-import { Checkbox, IconButton } from '@mui/material'
-import {
-  BookmarkAdd,
-  BookmarkAdded,
-  Favorite,
-  Share,
-} from '@mui/icons-material'
-import { useState } from 'react'
 import { articleQueries } from '~entities/article'
+import { withSuspense } from '~shared/lib/react'
+import { ArticleInfo } from '~widgets/article-info'
+import { ArticleViewer } from '~widgets/article-viewer'
+import { withErrorBoundary } from 'react-error-boundary'
+import { ErrorHandler } from '~shared/ui/error'
 
-export const ArticlePage = () => {
+function Page() {
   const { id } = useParams()
+  const [preLoad, setPreLoad] = useState(true)
+
+  useEffect(() => {
+    setPreLoad(false)
+  }, [])
+
   const {
     data: articleData,
-    isSuccess,
     isLoading,
     isError,
-  } = articleQueries.useGetArticleDetail(Number(id))
+  } = articleQueries.useGetArticleDetail(parseInt(id))
 
   if (isLoading) {
-    return <h4>Идёт загрузка Статьи</h4>
-  }
-  if (isError || !isSuccess || !articleData) {
-    return <h4>Ошибка, статья не найдена</h4>
+    return (
+      <div>
+        <CircularProgress className="w-[50px] mt-20 mx-auto flex justify-center" />
+        <p className="text-center mt-2">Загрузка статьи.</p>
+      </div>
+    )
   }
 
+  if (isError || !articleData) {
+    return <div className="my-20 text-center">Error fetching article data.</div>
+  }
   return (
     <>
-      <ArticleCard {...articleData.data}></ArticleCard>
+      <Container maxWidth="md" className="mx-auto my-[65px] ">
+        {articleData && (
+          <div className="max-w-full md:max-w-[95%] bg-[white] px-2 md:px-5  mb-5">
+            <ArticleInfo article={articleData.data} />
+            <Divider />
+            {preLoad ? (
+              <div className="flex flex-col items-center gap-3 my-20">
+                <CircularProgress />
+                Загрузка...
+              </div>
+            ) : (
+              <ArticleViewer body={articleData.data.body} />
+            )}
+          </div>
+        )}
+      </Container>
     </>
   )
 }
 
-const ArticleCard = ({ photo, title, subtitle }) => {
-  const [likeIcon, setLikeIcon] = useState(false)
-
-  return (
-    <Card className="p-10">
-      <CardMedia className="h-96" image={`${photo}`} title="green iguana" />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {title}
-        </Typography>
-        <Typography gutterBottom variant="h6" component="div">
-          {subtitle}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Checkbox
-          icon={<Favorite />}
-          checkedIcon={<Favorite className="text-uygur" />}
-          checked={likeIcon}
-          onClick={() => setLikeIcon((prev) => !prev)}
-        />
-
-        <Checkbox
-          icon={<BookmarkAdd />}
-          checkedIcon={<BookmarkAdded className="text-uygur" />}
-          checked={likeIcon}
-          onClick={() => setLikeIcon((prev) => !prev)}
-        />
-        <IconButton>
-          <Share />
-        </IconButton>
-      </CardActions>
-    </Card>
-  )
+function Loader() {
+  return <div className="my-20">loading...</div>
 }
+const SuspensedPage = withSuspense(Page, {
+  fallback: <Loader />,
+})
+
+export const ArticlePage = withErrorBoundary(SuspensedPage, {
+  fallbackRender: ({ error }) => <ErrorHandler error={error} />,
+})
