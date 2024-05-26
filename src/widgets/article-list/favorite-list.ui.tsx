@@ -41,11 +41,7 @@ export function FavoriteArticlesList() {
 
   const articles = articleData?.data?.favoriteArticles
 
-  const publishedArticles = !articles
-    ? []
-    : articles.filter((article) => article.status === 'approved')
-
-  if (publishedArticles.length == 0) {
+  if (articles.length == 0) {
     return (
       <div className="text-center font-medium">
         К сожалению, у вас нет избранных статей📖
@@ -56,7 +52,7 @@ export function FavoriteArticlesList() {
   return (
     <div className="flex flex-col mx-auto gap-5 max-w-[90%]">
       {isSuccess &&
-        publishedArticles.map((article) => (
+        articles.map((article) => (
           <ArticleCard article={article} key={article.id} />
         ))}
     </div>

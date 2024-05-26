@@ -12,9 +12,7 @@ export function getArticleDetailsQuery(id: number) {
   return axios.get<Article>(`${API_URL}api/articles/${id}/`)
 }
 
-// export function updateViewQuery(id: number) {
-//   return axios.get(`${API_URL}articles/update-view/${id}`);
-// }
+
 
 export function getFavoriteArticles() {
   return $api.get('/api/users/favorite/')

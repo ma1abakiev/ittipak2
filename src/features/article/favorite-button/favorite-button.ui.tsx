@@ -59,7 +59,7 @@ export function FavoriteButton(props: FavoriteButtonProps) {
     >
       <IconButton onClick={handleSaveFavorite} aria-label="В Избранное">
         {isFavoritedPosts ? (
-          <BookmarkAddedIcon className="text-second-100" />
+          <BookmarkAddedIcon className="text-uygur" />
         ) : (
           <BookmarkAddIcon className="hover:text-second-100" />
         )}

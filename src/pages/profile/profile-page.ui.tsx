@@ -1,4 +1,4 @@
-import { Avatar, Container } from '@mui/material'
+import { Avatar, Container, Paper } from '@mui/material'
 import { userQueries } from '~entities/user'
 // import { WriterArticles } from '~widgets/wrter-articles';
 
@@ -13,22 +13,28 @@ export function ProfilePage() {
     return <div>Error fetching user data.</div>
   }
 
-  const { email, firstName, lastName, photo } = userData.data
+  console.log(userData)
+
+  const { email, firstName, lastName, photo, username } = userData.data
 
   return (
-    <Container maxWidth="md" className="my-20">
-      <div className="w-[50%] mx-auto bg-[white] border-2 border-sc-100 rounded flex flex-col items-center  p-10">
+    <Container maxWidth="lg" className="my-20">
+      <Paper
+        elevation={3}
+        className="w-[50%] mx-auto bg-[white] border-[1px]  rounded flex  items-center  p-10 gap-10"
+      >
         <Avatar
           className="h-[100px] w-[100px] rounded"
           src={photo}
-          alt={`${firstName} ${lastName}`}
+          alt={`${firstName}`}
         />
-        <div className="flex flex-col items-center">
-          <h1 className="text-xl font-bold text-primary-800">{`${firstName} ${lastName}`}</h1>
-          <h2 className="text-sm text-gray-600">{email}</h2>
+        <div className="flex flex-col items-start">
+          <h1 className="text-xl font-bold">Nickname: {username}</h1>
+          <h2>Имя: {firstName}</h2>
+          <h2>Фамилия: {lastName}</h2>
+          <h2 className="text-sm text-gray">mail: {email}</h2>
         </div>
-      </div>
-      {/* {role === "writer" ? (<><h2 className="my-2 font-bold text-xl">Мои статьи</h2><WriterArticles /></> ) : null} */}
+      </Paper>
     </Container>
   )
 }

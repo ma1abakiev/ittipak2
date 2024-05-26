@@ -16,6 +16,7 @@ import { useState } from 'react'
 import { articleQueries } from '~entities/article'
 import { FavoriteButton } from '~features/article/favorite-button'
 import { LikeButton } from '~features/article/like-button'
+import { ShareButton } from '~features/article/share-button'
 
 export const ArticleList = () => {
   const {
@@ -79,23 +80,8 @@ const ArticleCard = ({ photo, title, subtitle, id, likes }) => {
           }}
         />
         <FavoriteButton id={id} />
-        {/* <Checkbox
-          icon={<Favorite />}
-          checkedIcon={<Favorite className="text-uygur" />}
-          checked={likeIcon}
-          onClick={() => setLikeIcon((prev) => !prev)}
-        /> */}
 
-        {/* <Checkbox
-          icon={<BookmarkAdd />}
-          checkedIcon={<BookmarkAdded className="text-uygur" />}
-          checked={likeIcon}
-          onClick={() => setLikeIcon((prev) => !prev)}
-        /> */}
-
-        <IconButton>
-          <Share />
-        </IconButton>
+        <ShareButton title={title} id={id} />
       </CardActions>
     </Card>
   )

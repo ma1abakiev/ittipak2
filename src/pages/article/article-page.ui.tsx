@@ -1,4 +1,9 @@
-import { CircularProgress, Container, Divider } from '@mui/material'
+import {
+  CardActions,
+  CircularProgress,
+  Container,
+  Divider,
+} from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { articleQueries } from '~entities/article'
@@ -7,6 +12,11 @@ import { ArticleInfo } from '~widgets/article-info'
 import { ArticleViewer } from '~widgets/article-viewer'
 import { withErrorBoundary } from 'react-error-boundary'
 import { ErrorHandler } from '~shared/ui/error'
+import { CommentForm } from '~widgets/comment-form'
+import { CommentList } from '~widgets/comment-list'
+import { LikeButton } from '~features/article/like-button'
+import { FavoriteButton } from '~features/article/favorite-button'
+import { ShareButton } from '~features/article/share-button'
 
 function Page() {
   const { id } = useParams()
@@ -36,7 +46,7 @@ function Page() {
   }
   return (
     <>
-      <Container maxWidth="md" className="mx-auto my-[65px] ">
+      <Container maxWidth="lg" className="mx-auto my-[65px] ">
         {articleData && (
           <div className="max-w-full md:max-w-[95%] bg-[white] px-2 md:px-5  mb-5">
             <ArticleInfo article={articleData.data} />
@@ -51,6 +61,29 @@ function Page() {
             )}
           </div>
         )}
+        <div>
+          <CardActions>
+            <LikeButton
+              like={{
+                id: articleData.data.id,
+                likeCount: articleData.data.likes.length,
+                likes: articleData.data.likes,
+              }}
+            />
+            <FavoriteButton id={articleData.data.id} />
+
+            <ShareButton
+              title={articleData.data.title}
+              id={articleData.data.id}
+            />
+          </CardActions>
+        </div>
+
+        <div className=" max-w-full md:max-w-[95%] bg-[white] px-2 py-5  md:p-5">
+          <h3 className="font-bold text-2xl">Комментарии</h3>
+          <CommentForm id={parseInt(id)} />
+          <CommentList id={parseInt(id)} />
+        </div>
       </Container>
     </>
   )
