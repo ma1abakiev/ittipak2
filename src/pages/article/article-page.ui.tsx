@@ -17,6 +17,7 @@ import { CommentList } from '~widgets/comment-list'
 import { LikeButton } from '~features/article/like-button'
 import { FavoriteButton } from '~features/article/favorite-button'
 import { ShareButton } from '~features/article/share-button'
+import { EditButton } from '~features/article/edit-button'
 
 function Page() {
   const { id } = useParams()
@@ -76,6 +77,7 @@ function Page() {
               title={articleData.data.title}
               id={articleData.data.id}
             />
+            <EditButton id={articleData.data.id}></EditButton>
           </CardActions>
         </div>
 

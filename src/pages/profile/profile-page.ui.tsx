@@ -1,6 +1,5 @@
 import { Avatar, Container, Paper } from '@mui/material'
 import { userQueries } from '~entities/user'
-// import { WriterArticles } from '~widgets/wrter-articles';
 
 export function ProfilePage() {
   const { data: userData, isLoading, isError } = userQueries.useLoginUserQuery()

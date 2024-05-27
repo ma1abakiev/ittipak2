@@ -17,6 +17,7 @@ import { articleQueries } from '~entities/article'
 import { FavoriteButton } from '~features/article/favorite-button'
 import { LikeButton } from '~features/article/like-button'
 import { ShareButton } from '~features/article/share-button'
+import { EditButton } from '~features/article/edit-button'
 
 export const ArticleList = () => {
   const {
@@ -82,6 +83,7 @@ const ArticleCard = ({ photo, title, subtitle, id, likes }) => {
         <FavoriteButton id={id} />
 
         <ShareButton title={title} id={id} />
+        <EditButton id={id}></EditButton>
       </CardActions>
     </Card>
   )

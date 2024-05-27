@@ -12,7 +12,6 @@ import {
   getArticleDetailsQuery,
   getArticleQuery,
   getFavoriteArticles,
-  getWriterArticles,
   likeArticleQuery,
 } from './article.api';
 import { toast } from 'react-toastify';
@@ -102,19 +101,7 @@ export function useGetArticleDetail(id: number) {
   });
 }
 
-export function useGetWriterArticle() {
-  return useQuery({
-    queryKey: keys.getWriterArticle(),
-    queryFn: getWriterArticles,
-  });
-}
 
-// export function useUpdateArticleView(id: number) {
-//   return useQuery({
-//     queryKey: keys.viewArticle(id),
-//     queryFn: () => updateViewQuery(id),
-//   });
-// }
 
 export function useLikeArticle(id: number) {
   const queryClient = useQueryClient();

@@ -18,10 +18,6 @@ export function getFavoriteArticles() {
   return $api.get('/api/users/favorite/')
 }
 
-export function getWriterArticles() {
-  return $api.get<ArticlesList>('api/articles/me/')
-}
-
 export function likeArticleQuery(id: number) {
   return $api.get(`api/articles/like/${id}`)
 }
@@ -31,7 +27,7 @@ export function createArticleMutation(props: CreateArticleDto = {}) {
 }
 
 export function editArticle(props: any = {}) {
-  return $api.patch(`articles/me/${String(props.data.id)}/`, props.data)
+  return $api.patch(`api/articles/admin/${String(props.data.id)}/`, props.data)
 }
 
 export function favoriteArticleQuery(id: number) {

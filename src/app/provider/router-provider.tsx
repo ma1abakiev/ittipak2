@@ -15,6 +15,7 @@ import { verifyPageRoute } from '~pages/verify'
 import { profilePageRoute } from '~pages/profile'
 import { sandboxPageRoute } from '~pages/sandbox'
 import { favoritesPageRoute } from '~pages/favorites'
+import { editPageRoute } from '~pages/edit'
 
 function BubbleError() {
   const error = useRouteError()
@@ -33,7 +34,8 @@ const router = createBrowserRouter([
           articlePageRoute,
           profilePageRoute,
           sandboxPageRoute,
-          favoritesPageRoute
+          favoritesPageRoute,
+          editPageRoute
         ],
       },
       {
