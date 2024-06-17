@@ -1,8 +1,7 @@
-import { Typography } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 import { getCookie } from 'typescript-cookie'
+import { Footer } from '~widgets/footer'
 import { GuestBar } from '~widgets/guest-bar'
-import { Intro } from '~widgets/intro'
 import { TopBar } from '~widgets/top-bar'
 
 export const GenericLayout = () => {
@@ -10,14 +9,12 @@ export const GenericLayout = () => {
 
   return (
     <>
-      {isAuth ? <TopBar /> : <GuestBar />}
-      <Intro>
-        <Typography className="text-4xl text-uygur" color={'primary'}>
-          Уйгурский новостной портал
-        </Typography>
-      </Intro>
-      <div className="container mt-10">
-        <Outlet></Outlet>
+      <div className="flex min-h-[100vh] flex-col justify-between">
+        {isAuth ? <TopBar /> : <GuestBar />}
+        <div className="container mt-10 mb-10">
+          <Outlet></Outlet>
+        </div>
+        <Footer></Footer>
       </div>
     </>
   )

@@ -13,16 +13,13 @@ import {
 } from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom'
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded'
-import SearchIcon from '@mui/icons-material/Search'
 import MenuIcon from '@mui/icons-material/Menu'
 import EditIcon from '@mui/icons-material/Edit'
 import { removeCookie } from 'typescript-cookie'
 import { pathKeys } from '~shared/lib/react-router'
 import { userQueries } from '~entities/user'
-import WidgetsIcon from '@mui/icons-material/Widgets'
 
 const pages = {
-  feed: 'Лента',
   favorites: 'Избранные',
 }
 
@@ -63,15 +60,18 @@ export function TopBar() {
     removeCookie('refresh')
     navigate(`${pathKeys.home()}`)
     userQueries.userService.removeCache()
-    window.location.reload() // Обновить страницу
+    window.location.reload()
   }
 
   return (
     <AppBar position="sticky" className="bg-uygur">
       <Container maxWidth="lg">
         <Toolbar disableGutters className="flex justify-between">
-          <Link to={pathKeys.home()} className="text-white text-2xl">
-            Ittipak
+          <Link
+            to={pathKeys.home()}
+            className="font-bold text-xl md:block hidden"
+          >
+            Doppa
           </Link>
 
           <div className="flex md:hidden">
@@ -110,9 +110,8 @@ export function TopBar() {
           </div>
 
           <div className="flex md:hidden">
-            <WidgetsIcon />
             <Link to={pathKeys.home()} className="font-bold text-xl">
-              Makala Box
+              Ittipak
             </Link>
           </div>
 
@@ -123,11 +122,7 @@ export function TopBar() {
                   <BookmarkAddedIcon className="hover:text-second-100 text-white" />
                 </IconButton>
               </Link>
-              <Link to={pathKeys.feed()}>
-                <IconButton aria-label="navigate to article page">
-                  <SearchIcon className="hover:text-second-100 text-white" />
-                </IconButton>
-              </Link>
+
               {isStaff && (
                 <Button
                   onClick={() => navigate(pathKeys.editor.root())}

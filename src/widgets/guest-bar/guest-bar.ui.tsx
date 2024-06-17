@@ -10,7 +10,7 @@ export function GuestBar() {
         <Toolbar disableGutters className="flex justify-between">
           <Box className="flex items-center">
             <Link to={pathKeys.home()} className="text-white text-2xl">
-              Ittipak
+              Doppa
             </Link>
           </Box>
           <Box className="flex items-center gap-1">

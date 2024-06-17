@@ -4,6 +4,7 @@ import {
   CardMedia,
   Tooltip,
   CircularProgress,
+  Paper,
 } from '@mui/material'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ru'
@@ -15,6 +16,7 @@ import { FavoriteButton } from '~features/article/favorite-button'
 
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled'
+import { EditButton } from '~features/article/edit-button'
 
 dayjs.locale('ru')
 
@@ -64,7 +66,7 @@ type ArticleCardProps = { article: articleTypes.Article }
 
 function ArticleCard(props: ArticleCardProps) {
   return (
-    <Card className="min-w-full max-w-full  shadow-none border border-sc-100 p-2 card">
+    <Paper elevation={10} className="min-w-full max-w-full  shadow-none p-2 card">
       <div className="flex flex-col-reverse md:flex-row items-center md:justify-between">
         <CardContent className="md:p-[12px] p-2">
           <div className="flex justify-between items-center pb-3">
@@ -118,6 +120,7 @@ function ArticleCard(props: ArticleCardProps) {
                 }}
               />
               <FavoriteButton id={props.article.id} />
+              <EditButton id={props.article.id}></EditButton>
             </div>
           </div>
         </CardContent>
@@ -129,6 +132,6 @@ function ArticleCard(props: ArticleCardProps) {
           title={props.article.title}
         />
       </div>
-    </Card>
+    </Paper>
   )
 }

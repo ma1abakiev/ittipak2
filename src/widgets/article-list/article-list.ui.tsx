@@ -2,22 +2,15 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
-import {
-  Box,
-  CardActionArea,
-  CardActions,
-  Checkbox,
-  IconButton,
-} from '@mui/material'
+import { Box, CardActionArea, CardActions } from '@mui/material'
 
 import { Link } from 'react-router-dom'
-import { Favorite, Share } from '@mui/icons-material'
-import { useState } from 'react'
 import { articleQueries } from '~entities/article'
 import { FavoriteButton } from '~features/article/favorite-button'
 import { LikeButton } from '~features/article/like-button'
 import { ShareButton } from '~features/article/share-button'
 import { EditButton } from '~features/article/edit-button'
+import { getCookie } from 'typescript-cookie'
 
 export const ArticleList = () => {
   const {
@@ -37,7 +30,7 @@ export const ArticleList = () => {
   if (isSuccess) {
     return (
       <>
-        <Box className="flex justify-center flex-wrap gap-x-8 gap-y-5">
+        <Box className="grid grid-cols-3 gap-10 ">
           {articleData.data.results.map((article) => {
             return <ArticleCard key={article.id} {...article} />
           })}
@@ -48,17 +41,17 @@ export const ArticleList = () => {
 }
 
 const ArticleCard = ({ photo, title, subtitle, id, likes }) => {
-  const [likeIcon, setLikeIcon] = useState(false)
+  const isAuth = getCookie('access')
 
   return (
-    <Card className="w-80 h-100 flex flex-col justify-between  hover:scale-105 transition-all">
+    <Card className=" flex flex-col justify-between  hover:scale-105 transition-all">
       <Link to={`article/${id}`}>
         <CardActionArea>
           <CardMedia
             component="img"
             image={photo}
             alt="green iguana"
-            className="w-full h-[250px]"
+            className="w-full h-[200px]"
           />
           <CardContent>
             <Typography variant="h5" component="div" className="color-black">
@@ -80,10 +73,12 @@ const ArticleCard = ({ photo, title, subtitle, id, likes }) => {
             likes: likes,
           }}
         />
+
         <FavoriteButton id={id} />
 
         <ShareButton title={title} id={id} />
-        <EditButton id={id}></EditButton>
+
+        {isAuth && <EditButton id={id}></EditButton>}
       </CardActions>
     </Card>
   )

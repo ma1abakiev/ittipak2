@@ -18,10 +18,12 @@ import { LikeButton } from '~features/article/like-button'
 import { FavoriteButton } from '~features/article/favorite-button'
 import { ShareButton } from '~features/article/share-button'
 import { EditButton } from '~features/article/edit-button'
+import { getCookie } from 'typescript-cookie'
 
 function Page() {
   const { id } = useParams()
   const [preLoad, setPreLoad] = useState(true)
+  const isAuth = getCookie('access')
 
   useEffect(() => {
     setPreLoad(false)
@@ -60,26 +62,26 @@ function Page() {
             ) : (
               <ArticleViewer body={articleData.data.body} />
             )}
+            <div>
+              <CardActions>
+                <LikeButton
+                  like={{
+                    id: articleData.data.id,
+                    likeCount: articleData.data.likes.length,
+                    likes: articleData.data.likes,
+                  }}
+                />
+                <FavoriteButton id={articleData.data.id} />
+
+                <ShareButton
+                  title={articleData.data.title}
+                  id={articleData.data.id}
+                />
+                {isAuth && <EditButton id={articleData.data.id}></EditButton>}
+              </CardActions>
+            </div>
           </div>
         )}
-        <div>
-          <CardActions>
-            <LikeButton
-              like={{
-                id: articleData.data.id,
-                likeCount: articleData.data.likes.length,
-                likes: articleData.data.likes,
-              }}
-            />
-            <FavoriteButton id={articleData.data.id} />
-
-            <ShareButton
-              title={articleData.data.title}
-              id={articleData.data.id}
-            />
-            <EditButton id={articleData.data.id}></EditButton>
-          </CardActions>
-        </div>
 
         <div className=" max-w-full md:max-w-[95%] bg-[white] px-2 py-5  md:p-5">
           <h3 className="font-bold text-2xl">Комментарии</h3>
