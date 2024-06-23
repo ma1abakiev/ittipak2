@@ -49,9 +49,11 @@ function Page() {
   }
   return (
     <>
-      <Container maxWidth="lg" className="mx-auto my-[65px] ">
+      {/* <Container maxWidth="lg" className="mx-auto my-[65px] "> */}
+      <div className='container'>
+
         {articleData && (
-          <div className="max-w-full md:max-w-[95%] bg-[white] px-2 md:px-5  mb-5">
+          <div className="max-w-full  bg-[white] px-2 md:px-5  mb-5">
             <ArticleInfo article={articleData.data} />
             <Divider />
             {preLoad ? (
@@ -83,12 +85,14 @@ function Page() {
           </div>
         )}
 
-        <div className=" max-w-full md:max-w-[95%] bg-[white] px-2 py-5  md:p-5">
+        <div className=" max-w-full  bg-[white] px-2 py-5  md:p-5">
           <h3 className="font-bold text-2xl">Комментарии</h3>
           <CommentForm id={parseInt(id)} />
           <CommentList id={parseInt(id)} />
         </div>
-      </Container>
+        </div>
+
+      {/* </Container> */}
     </>
   )
 }

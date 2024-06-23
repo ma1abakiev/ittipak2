@@ -1,20 +1,19 @@
+// article-viewer.ui.tsx
 import {
   BlockNoteSchema,
   defaultBlockSpecs,
   defaultStyleSpecs,
 } from '@blocknote/core';
-import {  useCreateBlockNote } from '@blocknote/react';
+import { useCreateBlockNote } from '@blocknote/react';
 import { CodeBlock } from '@defensestation/blocknote-code';
 import { AlertBlock } from '~features/blocknote/alert-block';
 import { YouTubeBlock } from '~features/blocknote/youtube-block';
 import { codeStyleSpec } from '~features/blocknote/code-toolbar';
-import {
-  commentStyleSpec,
-} from '@defensestation/blocknote-comments';
+import { commentStyleSpec } from '@defensestation/blocknote-comments';
 import '@blocknote/core/fonts/inter.css';
-
 import '@blocknote/react/style.css';
 import { BlockNoteView } from '@blocknote/mantine';
+import { PDF } from '~features/blocknote/pdf-block'; // Import the PDF block
 
 const schema = BlockNoteSchema.create({
   blockSpecs: {
@@ -22,6 +21,7 @@ const schema = BlockNoteSchema.create({
     alert: AlertBlock,
     youtube: YouTubeBlock,
     procode: CodeBlock,
+    pdf: PDF, // Add PDF block to the schema
   },
   styleSpecs: {
     ...defaultStyleSpecs,
@@ -48,8 +48,6 @@ export function ArticleViewer(props: ArticleViewerProps) {
       theme={'light'}
       formattingToolbar={false}
       editable={false}
-    >
-
-    </BlockNoteView>
+    />
   );
 }

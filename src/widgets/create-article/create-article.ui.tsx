@@ -16,7 +16,7 @@ import {
 } from '@blocknote/react'
 import { CodeBlock, insertCode } from '@defensestation/blocknote-code'
 import { AlertBlock } from '~features/blocknote/alert-block'
-import { RiAlertFill } from 'react-icons/ri'
+import { RiAlertFill, RiFilePdfFill, RiYoutubeFill } from 'react-icons/ri'
 import { CustomSlashMenu } from '~features/blocknote/custom-slash'
 import { codeStyleSpec } from '~features/blocknote/code-toolbar/code-toolbar.stylespec'
 import { CustomToolbar } from '~features/blocknote/custom-toolbar'
@@ -24,7 +24,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { CircularProgress } from '@mui/material'
 import { BlockNoteView } from '@blocknote/mantine'
 import { YouTubeBlock } from '~features/blocknote/youtube-block'
-import { RiYoutubeFill } from 'react-icons/ri'
+import { PDF } from '~features/blocknote/pdf-block' // Import the PDF block
 
 const schema = BlockNoteSchema.create({
   blockSpecs: {
@@ -32,6 +32,7 @@ const schema = BlockNoteSchema.create({
     youtube: YouTubeBlock,
     alert: AlertBlock,
     procode: CodeBlock,
+    pdf: PDF, // Add PDF block to the schema
   },
   styleSpecs: {
     ...defaultStyleSpecs,
@@ -78,16 +79,29 @@ const insertYouTubeVideo = (editor: typeof schema.BlockNoteEditor) => ({
   icon: <RiYoutubeFill />,
 })
 
+// Define the insertPDF function
+const insertPDF = (editor: typeof schema.BlockNoteEditor) => ({
+  title: 'PDF',
+  onItemClick: () => {
+    insertOrUpdateBlock(editor, {
+      type: 'pdf',
+    })
+  },
+  aliases: ['pdf', 'document', 'embed', 'file'],
+  group: 'Other',
+  icon: <RiFilePdfFill />,
+})
+
 async function uploadFile(file: File) {
-  const body = new FormData();
-  body.append('file', file);
+  const body = new FormData()
+  body.append('file', file)
   try {
-    console.log(file);
-    const response = await $api.post('api/articles/file-upload/', body);
-    return response.data.file;
+    console.log(file)
+    const response = await $api.post('api/articles/file-upload/', body)
+    return response.data.file
   } catch (error) {
-    console.error('Error uploading file:', error);
-    throw new Error('File upload failed');
+    console.error('Error uploading file:', error)
+    throw new Error('File upload failed')
   }
 }
 
@@ -148,6 +162,7 @@ export function CreateArticle() {
               insertYouTubeVideo(editor),
               insertAlert(editor),
               insertCode(),
+              insertPDF(editor), // Add PDF insertion to the suggestion menu
             ],
             query
           )

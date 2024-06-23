@@ -4,7 +4,7 @@ export default {
   important: '#root',
   theme: {
     container: {
-      padding: '200px',
+      padding: '150px',
     },
     fontFamily: {
       serif: ['Roboto'],

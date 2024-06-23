@@ -32,7 +32,7 @@ export const ArticleList = () => {
     return (
       <>
         <h2 className="text-center text-4xl">Лента</h2>
-        <Box className="grid grid-cols-2 gap-10 mt-10 ">
+        <Box className="grid grid-cols-2 gap-x-10 gap-y-10 mt-10 p-10">
           {articleData.data.results.map((article) => {
             return <ArticleCard key={article.id} {...article} />
           })}
@@ -44,7 +44,7 @@ export const ArticleList = () => {
 
 const ArticleCard = ({ photo, title, subtitle, id, likes }) => {
   const isAuth = getCookie('access')
-  const { data: userData } = userQueries.useLoginUserQuery()
+  // const { data: userData } = userQueries.useLoginUserQuery()
 
   return (
     <Card className=" flex flex-col justify-between gap-2  hover:scale-105 transition-all p-5">
@@ -64,7 +64,7 @@ const ArticleCard = ({ photo, title, subtitle, id, likes }) => {
             component="img"
             image={photo}
             alt="green iguana"
-            className="w-full h-[400px]"
+            className="w-full h-[300px]"
           />
           <CardContent>
             <Typography variant="h5" component="div" className="color-black">

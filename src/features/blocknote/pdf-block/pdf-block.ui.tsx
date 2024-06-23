@@ -7,9 +7,9 @@ import {
   ReactCustomBlockRenderProps,
 } from "@blocknote/react";
 import { RiFilePdfFill } from "react-icons/ri";
- 
+
 import "./style.css";
- 
+
 export const PDFPreview = (
   props: Omit<
     ReactCustomBlockRenderProps<FileBlockConfig, any, any>,
@@ -26,7 +26,7 @@ export const PDFPreview = (
     />
   );
 };
- 
+
 export const PDF = createReactBlockSpec(
   {
     type: "pdf",
