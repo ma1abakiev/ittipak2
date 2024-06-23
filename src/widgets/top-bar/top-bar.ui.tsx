@@ -5,14 +5,12 @@ import {
   IconButton,
   MenuItem,
   Menu,
-  Container,
   Typography,
   Tooltip,
   Avatar,
   Button,
 } from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom'
-import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded'
 import MenuIcon from '@mui/icons-material/Menu'
 import EditIcon from '@mui/icons-material/Edit'
 import { removeCookie } from 'typescript-cookie'
@@ -65,7 +63,7 @@ export function TopBar() {
 
   return (
     <AppBar position="sticky" className="bg-uygur">
-      <Container maxWidth="lg">
+      <div className="container">
         <Toolbar disableGutters className="flex justify-between">
           <Link
             to={pathKeys.home()}
@@ -111,17 +109,30 @@ export function TopBar() {
 
           <div className="flex md:hidden">
             <Link to={pathKeys.home()} className="font-bold text-xl">
-              Ittipak
+              Doppa
             </Link>
           </div>
 
           <div className="flex gap-4">
             <div className="hidden md:flex items-center ml-3">
-              <Link to={pathKeys.favorites()}>
-                <IconButton aria-label="navigate to favorites article page">
-                  <BookmarkAddedIcon className="hover:text-second-100 text-white" />
-                </IconButton>
-              </Link>
+              <div className='flex gap-5 mr-20'>
+                <Link to={pathKeys.favorites()}>
+                  <Typography
+                    aria-label="navigate to favorites article page"
+                    className="text-white"
+                  >
+                    ИЗБРАННЫЕ
+                  </Typography>
+                </Link>
+                <Link to={pathKeys.aboutUs()}>
+                  <Typography
+                    aria-label="navigate to favorites article page"
+                    className="text-white"
+                  >
+                    О НАС
+                  </Typography>
+                </Link>
+              </div>
 
               {isStaff && (
                 <Button
@@ -157,7 +168,7 @@ export function TopBar() {
             </div>
           </div>
         </Toolbar>
-      </Container>
+      </div>
     </AppBar>
   )
 }

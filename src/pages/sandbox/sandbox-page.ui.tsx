@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CreateArticle } from '~widgets/create-article'
 import {
   Container,
@@ -113,7 +113,6 @@ function Page() {
           <div className="w-full my-5 flex flex-col bg-[white] border border-sc-100 p-5 rounded">
             <h3 className="text-xl font-bold text-center">Публикация</h3>
 
-   
             <h4 className="text-lg font-medium mt-3">
               Загрузите обложку для статьи
             </h4>

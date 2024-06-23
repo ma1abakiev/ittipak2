@@ -54,7 +54,7 @@ export function EditPage() {
         }
       }
 
-      const trimmedSubtitle = firstParagraphText.substring(0, 100).toString()
+      const trimmedSubtitle = firstParagraphText.substring(0, 200).toString()
       const data = {
         title: title,
         id: id,

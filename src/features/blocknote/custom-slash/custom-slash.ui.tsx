@@ -23,6 +23,14 @@ function getTranslatedText(title: string): string {
       return 'Таблица'
     case 'Image':
       return 'Изображение'
+    case 'Video':
+      return 'Видео'
+    case 'Audio':
+      return 'Аудио'
+    case 'Check List':
+      return 'Список'
+    case 'File':
+      return 'Файл'
     default:
       return title
   }
@@ -53,10 +61,14 @@ export function CustomSlashMenu(
       className="slash-menu bg-green max-h-48 overflow-y-auto "
       ref={menuRef}
     >
+      {/* <div
+        className="slash-menu bg-none max-h-48 overflow-y-auto"
+        ref={menuRef}
+      > */}
       {props.items.map((item, index) => (
         <div
           key={index}
-          className={`slash-menu-item border-b border-b-uygur p-3  cursor-pointer bg-white  ${
+          className={`slash-menu-item border-b border-b-uygur p-3  cursor-pointer bg-white hover:bg-uygur ${
             props.selectedIndex === index ? 'selected bg-uygur/25' : ''
           }`}
           onClick={() => {
@@ -73,6 +85,7 @@ export function CustomSlashMenu(
           </div>
         </div>
       ))}
+      {/* </div> */}
     </Paper>
   )
 }

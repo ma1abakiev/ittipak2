@@ -15,7 +15,6 @@ export const EditButton = ({ id }) => {
     return <div>Error fetching user data.</div>
   }
 
-  console.log(userData)
 
   const handlePath = () => {
     navigate(`/article/edit/${id}/`)

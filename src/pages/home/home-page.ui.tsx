@@ -1,5 +1,13 @@
 import { ArticleList } from '~widgets/article-list'
+import { Intro } from '~widgets/intro'
 
 export const HomePage = () => {
-  return <ArticleList></ArticleList>
+  return (
+    <>
+      <Intro></Intro>
+      <div className="container mt-10">
+        <ArticleList></ArticleList>
+      </div>
+    </>
+  )
 }

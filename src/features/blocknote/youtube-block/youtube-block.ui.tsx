@@ -1,7 +1,7 @@
-import { createReactBlockSpec } from '@blocknote/react';
-import { Menu, TextInput } from '@mantine/core';
-import { useState } from 'react';
-import { Button } from '@mui/material';
+import { createReactBlockSpec } from '@blocknote/react'
+import { Menu, TextInput } from '@mantine/core'
+import { useState } from 'react'
+import { Button } from '@mui/material'
 
 export const YouTubeBlock = createReactBlockSpec(
   {
@@ -15,23 +15,23 @@ export const YouTubeBlock = createReactBlockSpec(
   },
   {
     render: (props) => {
-      const [url, setUrl] = useState(props.block.props.url);
-      const [tempUrl, setTempUrl] = useState(url);
-      const [menuOpened, setMenuOpened] = useState(false);
+      const [url, setUrl] = useState(props.block.props.url)
+      const [tempUrl, setTempUrl] = useState(url)
+      const [menuOpened, setMenuOpened] = useState(false)
 
       const updateUrl = () => {
         props.editor.updateBlock(props.block, {
           type: 'youtube',
           props: { url: tempUrl },
-        });
-        setUrl(tempUrl);
-        setMenuOpened(false);
-      };
+        })
+        setUrl(tempUrl)
+        setMenuOpened(false)
+      }
 
       const getYouTubeEmbedUrl = (url) => {
-        const videoId = url.split('v=')[1]?.split('&')[0];
-        return videoId ? `https://www.youtube.com/embed/${videoId}?rel=0` : '';
-      };
+        const videoId = url.split('v=')[1]?.split('&')[0]
+        return videoId ? `https://www.youtube.com/embed/${videoId}?rel=0` : ''
+      }
 
       return (
         <div>
@@ -52,7 +52,7 @@ export const YouTubeBlock = createReactBlockSpec(
                 <Menu.Divider />
                 <TextInput
                   value={tempUrl}
-                  className='border rounded'
+                  className="border rounded"
                   onChange={(event) => setTempUrl(event.currentTarget.value)}
                 />
                 <Button
@@ -67,12 +67,14 @@ export const YouTubeBlock = createReactBlockSpec(
             </Menu>
           )}
           {url ? (
-            <iframe
-              width="100%"
-              className="h-[200px] md:h-[480px]"
-              src={getYouTubeEmbedUrl(url)}
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            ></iframe>
+            <div className=''>
+              <iframe
+                width="100%"
+                className="w-full h-[200px] md:h-[480px]"
+                src={getYouTubeEmbedUrl(url)}
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              ></iframe>
+            </div>
           ) : (
             <div
               className="flex flex-col items-center gap-2 p-5 text-[#888] bg-[#f9f9f9] border border-[#ddd]"
@@ -90,7 +92,7 @@ export const YouTubeBlock = createReactBlockSpec(
           )}
           <div className="inline-content" ref={props.contentRef} />
         </div>
-      );
+      )
     },
   }
-);
+)

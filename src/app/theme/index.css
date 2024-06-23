@@ -9,7 +9,8 @@
   font-family: 'Roboto';
 }
 body {
-  background-color: #eef6ff;
+  background-color: #eef6ff; 
+  /* background-color: #deedff; */
 }
 .slash-menu-item:hover,
 .slash-menu-item.selected {

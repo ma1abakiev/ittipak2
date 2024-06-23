@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router-dom'
 import { getCookie } from 'typescript-cookie'
-import { Footer } from '~widgets/footer'
 import { GuestBar } from '~widgets/guest-bar'
 import { TopBar } from '~widgets/top-bar'
 
@@ -11,10 +10,9 @@ export const GenericLayout = () => {
     <>
       <div className="flex min-h-[100vh] flex-col justify-between">
         {isAuth ? <TopBar /> : <GuestBar />}
-        <div className="container mt-10 mb-10">
+        <div className="mb-10">
           <Outlet></Outlet>
         </div>
-        <Footer></Footer>
       </div>
     </>
   )

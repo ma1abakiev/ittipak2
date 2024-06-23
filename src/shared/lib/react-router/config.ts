@@ -47,4 +47,7 @@ export const pathKeys = {
       return pathKeys.root.concat('profile/')
     },
   },
+  aboutUs() {
+    return pathKeys.root.concat('aboutus/')
+  },
 }
