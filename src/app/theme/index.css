@@ -9,8 +9,21 @@
   font-family: 'Roboto';
 }
 body {
-  background-color: #eef6ff; 
-  /* background-color: #deedff; */
+  background-color: #f0f0f0;
+  /* background: linear-gradient(45deg, #9cecfb, #65c7f7, #0052d4); */
+  /* background-size: 200% 200%; */
+  /* animation: gradient 10s ease infinite; */
+}
+@keyframes gradient {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 .slash-menu-item:hover,
 .slash-menu-item.selected {

@@ -1,5 +1,4 @@
 import {
-  Card,
   CardContent,
   CardMedia,
   Tooltip,
@@ -61,12 +60,14 @@ export function FavoriteArticlesList() {
   )
 }
 
-// Article Card Component
 type ArticleCardProps = { article: articleTypes.Article }
 
 function ArticleCard(props: ArticleCardProps) {
   return (
-    <Paper elevation={10} className="min-w-full max-w-full  shadow-none p-2 card">
+    <Paper
+      elevation={10}
+      className="min-w-full max-w-full  shadow-none p-2 card"
+    >
       <div className="flex flex-col-reverse md:flex-row items-center md:justify-between">
         <CardContent className="md:p-[12px] p-2">
           <div className="flex justify-between items-center pb-3">
@@ -115,7 +116,7 @@ function ArticleCard(props: ArticleCardProps) {
               <LikeButton
                 like={{
                   id: props.article.id,
-                  likeCount: props.article.likeCount,
+                  likeCount: props.article.likes.length,
                   likes: props.article.likes,
                 }}
               />

@@ -1,4 +1,4 @@
-import $api from '~shared/lib/api';
+import $api from '~shared/lib/api'
 import {
   Block,
   BlockNoteEditor,
@@ -8,24 +8,24 @@ import {
   defaultStyleSpecs,
   filterSuggestionItems,
   insertOrUpdateBlock,
-} from '@blocknote/core';
-import '@blocknote/core/fonts/inter.css';
+} from '@blocknote/core'
+import '@blocknote/core/fonts/inter.css'
 import {
   SuggestionMenuController,
   getDefaultReactSlashMenuItems,
-} from '@blocknote/react';
-import '@blocknote/react/style.css';
-import { CodeBlock, insertCode } from '@defensestation/blocknote-code';
-import { AlertBlock } from '~features/blocknote/alert-block';
-import { RiAlertFill } from 'react-icons/ri';
-import { CustomSlashMenu } from '~features/blocknote/custom-slash';
-import { codeStyleSpec } from './../../features/blocknote/code-toolbar/code-toolbar.stylespec';
-import { CustomToolbar } from '~features/blocknote/custom-toolbar';
-import { useEffect, useMemo, useState } from 'react';
-import { CircularProgress } from '@mui/material';
-import { BlockNoteView } from '@blocknote/mantine';
-import { YouTubeBlock } from '~features/blocknote/youtube-block';
-import { RiYoutubeFill } from 'react-icons/ri';
+} from '@blocknote/react'
+import '@blocknote/react/style.css'
+import { CodeBlock, insertCode } from '@defensestation/blocknote-code'
+import { AlertBlock } from '~features/blocknote/alert-block'
+import { RiAlertFill } from 'react-icons/ri'
+import { CustomSlashMenu } from '~features/blocknote/custom-slash'
+import { codeStyleSpec } from './../../features/blocknote/code-toolbar/code-toolbar.stylespec'
+import { CustomToolbar } from '~features/blocknote/custom-toolbar'
+import { useEffect, useMemo, useState } from 'react'
+import { CircularProgress } from '@mui/material'
+import { BlockNoteView } from '@blocknote/mantine'
+import { YouTubeBlock } from '~features/blocknote/youtube-block'
+import { RiYoutubeFill } from 'react-icons/ri'
 
 const schema = BlockNoteSchema.create({
   blockSpecs: {
@@ -38,19 +38,19 @@ const schema = BlockNoteSchema.create({
     ...defaultStyleSpecs,
     code: codeStyleSpec,
   },
-});
+})
 
 const insertAlert = (editor: typeof schema.BlockNoteEditor) => ({
   title: 'Заметки',
   onItemClick: () => {
     insertOrUpdateBlock(editor, {
       type: 'alert',
-    });
+    })
   },
   aliases: ['alert', 'notification', 'info', 'note'],
   group: 'Advanced',
   icon: <RiAlertFill />,
-});
+})
 
 const insertYouTubeVideo = (editor: typeof schema.BlockNoteEditor) => ({
   title: 'YouTube Видео',
@@ -60,65 +60,65 @@ const insertYouTubeVideo = (editor: typeof schema.BlockNoteEditor) => ({
       props: {
         url: '',
       },
-    });
+    })
   },
   aliases: ['youtube', 'video', 'embed', 'media'],
   group: 'Advanced',
   icon: <RiYoutubeFill />,
-});
+})
 
 async function uploadFile(file: File) {
-  const body = new FormData();
-  body.append('image', file);
+  const body = new FormData()
+  body.append('file', file)
   try {
-    console.log(file);
-    const response = await $api.post('articles/image-upload/', body);
-    return response.data.image;
+    console.log(file)
+    const response = await $api.post('api/articles/file-upload/', body)
+    return response.data.file
   } catch (error) {
-    console.error('Error uploading file:', error);
-    throw new Error('File upload failed');
+    console.error('Error uploading file:', error)
+    throw new Error('File upload failed')
   }
 }
 
 type EditArticleProps = {
-  id: number;
-  body: any;
-};
+  id: number
+  body: any
+}
 
 export function EditArticle(props: EditArticleProps) {
   const saveToStorage = async (jsonBlocks: Block[]) => {
-    localStorage.setItem(`editContent-${props.id}`, JSON.stringify(jsonBlocks));
-  };
+    localStorage.setItem(`editContent-${props.id}`, JSON.stringify(jsonBlocks))
+  }
 
   const loadFromStorage = async () => {
-    const storageString = localStorage.getItem(`editContent-${props.id}`);
+    const storageString = localStorage.getItem(`editContent-${props.id}`)
     return storageString
       ? (JSON.parse(storageString) as PartialBlock[])
-      : undefined;
-  };
+      : undefined
+  }
 
   const [initialContent, setInitialContent] = useState<
     PartialBlock[] | 'loading'
-  >('loading');
-  const [isLoading, setIsLoading] = useState(true);
+  >('loading')
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetchInitialContent = async () => {
-      const storedContent = await loadFromStorage();
-      setInitialContent(storedContent || props.body);
-      setIsLoading(false);
-    };
+      const storedContent = await loadFromStorage()
+      setInitialContent(storedContent || props.body)
+      setIsLoading(false)
+    }
 
-    fetchInitialContent();
-  }, [props.id, props.body]);
+    fetchInitialContent()
+  }, [props.id, props.body])
 
   const editor = useMemo(() => {
-    if (initialContent === 'loading') return undefined;
-    return BlockNoteEditor.create({ schema, initialContent, uploadFile });
-  }, [initialContent]);
+    if (initialContent === 'loading') return undefined
+    return BlockNoteEditor.create({ schema, initialContent, uploadFile })
+  }, [initialContent])
 
   if (editor === undefined) {
-    return 'Loading content...';
+    return 'Loading content...'
   }
 
   return isLoading ? (
@@ -152,5 +152,5 @@ export function EditArticle(props: EditArticleProps) {
         }
       />
     </BlockNoteView>
-  );
+  )
 }

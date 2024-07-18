@@ -4,6 +4,7 @@ export default {
   important: '#root',
   theme: {
     container: {
+      center: true,
       padding: '150px',
     },
     fontFamily: {
@@ -12,12 +13,15 @@ export default {
     },
     colors: {
       uygur: '#549DE2',
+      // uygur: '#2d90ed',
+      intro: 'rgba(0,0,0,.4)',
       white: '#FEFEFE',
       black: '#020617',
     },
     extend: {
       backgroundImage: {
-        'intro-img': "url('./public/uygur.jpg')",
+        'intro-img': "url('./public/mucams.jpeg')",
+        ittipak: "url('./public/ittipak_page-0001.jpg')",
       },
     },
   },

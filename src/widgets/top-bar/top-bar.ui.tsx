@@ -26,8 +26,9 @@ export function TopBar() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const { data: userData } = userQueries.useLoginUserQuery()
   const {
-    data: { firstName = '', lastName = '', isStaff = '', photo = '' } = {},
+    data: { firstName = '', lastName = '', role = '', photo = '' } = {},
   } = userData || {}
+  console.log(userData)
 
   const navigate = useNavigate()
 
@@ -62,17 +63,39 @@ export function TopBar() {
   }
 
   return (
-    <AppBar position="sticky" className="bg-uygur">
+    <AppBar position="fixed" className="bg-[#2d90ed']">
       <div className="container">
         <Toolbar disableGutters className="flex justify-between">
           <Link
             to={pathKeys.home()}
             className="font-bold text-xl md:block hidden"
           >
-            Doppa
+            <img
+              src="../../../public/ittipak_page-0001.svg"
+              className="w-16"
+              alt=""
+            />
           </Link>
+          <div className="flex gap-5 ">
+            <Link to={pathKeys.favorites()}>
+              <Typography
+                aria-label="navigate to favorites article page"
+                className="text-white"
+              >
+                ИЗБРАННЫЕ
+              </Typography>
+            </Link>
+            <Link to={pathKeys.aboutUs()}>
+              <Typography
+                aria-label="navigate to favorites article page"
+                className="text-white"
+              >
+                О НАС
+              </Typography>
+            </Link>
+          </div>
 
-          <div className="flex md:hidden">
+          {/* <div className="flex md:hidden">
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -109,38 +132,23 @@ export function TopBar() {
 
           <div className="flex md:hidden">
             <Link to={pathKeys.home()} className="font-bold text-xl">
-              Doppa
+              <img
+                src="../../../public/ittipak_page-0001.svg"
+                className="w-12"
+                alt=""
+              />
             </Link>
-          </div>
+          </div> */}
 
           <div className="flex gap-4">
             <div className="hidden md:flex items-center ml-3">
-              <div className='flex gap-5 mr-20'>
-                <Link to={pathKeys.favorites()}>
-                  <Typography
-                    aria-label="navigate to favorites article page"
-                    className="text-white"
-                  >
-                    ИЗБРАННЫЕ
-                  </Typography>
-                </Link>
-                <Link to={pathKeys.aboutUs()}>
-                  <Typography
-                    aria-label="navigate to favorites article page"
-                    className="text-white"
-                  >
-                    О НАС
-                  </Typography>
-                </Link>
-              </div>
-
-              {isStaff && (
+              {role == 'writer' && (
                 <Button
                   onClick={() => navigate(pathKeys.editor.root())}
                   size="small"
                   variant="outlined"
-                  endIcon={<EditIcon />}
-                  className="border-white text-white"
+                  endIcon={<EditIcon color="white" />}
+                  className="border-white text-white hover:scale-105 transition-all"
                 >
                   Написать
                 </Button>

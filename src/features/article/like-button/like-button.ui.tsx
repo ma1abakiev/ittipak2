@@ -6,6 +6,7 @@ import { getCookie } from 'typescript-cookie'
 import { userQueries } from '~entities/user'
 import { useNavigate } from 'react-router-dom'
 import { pathKeys } from '~shared/lib/react-router'
+import { useState } from 'react'
 
 type LikeButtonProps = { like: articleTypes.ArticleLike }
 
