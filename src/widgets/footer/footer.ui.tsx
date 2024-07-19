@@ -1,4 +1,4 @@
-import { Container, Paper } from '@mui/material'
+import { Paper } from '@mui/material'
 
 import InstagramIcon from '@mui/icons-material/Instagram'
 import EmailIcon from '@mui/icons-material/Email'
@@ -7,7 +7,7 @@ import TelegramIcon from '@mui/icons-material/Telegram'
 export function Footer() {
   return (
     <Paper elevation={20} className="bg-white    ">
-      <Container maxWidth="lg" className="py-6 flex justify-between ">
+      <div className="py-6 flex justify-between  container">
         <div>
           <p className="font-bold text-black">
             {new Date().getFullYear()} Doppa
@@ -33,7 +33,7 @@ export function Footer() {
             </a>
           </li>
         </ul>
-      </Container>
+      </div>
     </Paper>
   )
 }

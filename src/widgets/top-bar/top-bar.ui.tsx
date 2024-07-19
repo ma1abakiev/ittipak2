@@ -11,42 +11,22 @@ import {
   Button,
 } from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom'
-import MenuIcon from '@mui/icons-material/Menu'
 import EditIcon from '@mui/icons-material/Edit'
 import { removeCookie } from 'typescript-cookie'
 import { pathKeys } from '~shared/lib/react-router'
 import { userQueries } from '~entities/user'
 
-const pages = {
-  favorites: 'Избранные',
-}
-
 export function TopBar() {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const { data: userData } = userQueries.useLoginUserQuery()
   const {
     data: { firstName = '', lastName = '', role = '', photo = '' } = {},
   } = userData || {}
-  console.log(userData)
 
   const navigate = useNavigate()
 
-  const handleNavigateToPage = (pageName: string) => {
-    const path = `/${pageName.toLowerCase()}`
-    navigate(path)
-  }
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget)
-  }
-
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
-  }
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null)
   }
 
   const handleCloseUserMenu = () => {
@@ -66,13 +46,10 @@ export function TopBar() {
     <AppBar position="fixed" className="bg-[#2d90ed']">
       <div className="container">
         <Toolbar disableGutters className="flex justify-between">
-          <Link
-            to={pathKeys.home()}
-            className="font-bold text-xl md:block hidden"
-          >
+          <Link to={pathKeys.home()} className="font-bold text-xl ">
             <img
               src="../../../public/ittipak_page-0001.svg"
-              className="w-16"
+              className="min-w-16 max-w-16"
               alt=""
             />
           </Link>
@@ -95,53 +72,8 @@ export function TopBar() {
             </Link>
           </div>
 
-          {/* <div className="flex md:hidden">
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-              keepMounted
-              transformOrigin={{ vertical: 'top', horizontal: 'left' }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              className="block md:hidden"
-            >
-              {Object.keys(pages).map((pageKey) => (
-                <MenuItem
-                  key={pageKey}
-                  onClick={() => {
-                    handleNavigateToPage(pageKey)
-                    handleCloseNavMenu()
-                  }}
-                >
-                  <Typography textAlign="center">{pages[pageKey]}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </div>
-
-          <div className="flex md:hidden">
-            <Link to={pathKeys.home()} className="font-bold text-xl">
-              <img
-                src="../../../public/ittipak_page-0001.svg"
-                className="w-12"
-                alt=""
-              />
-            </Link>
-          </div> */}
-
           <div className="flex gap-4">
-            <div className="hidden md:flex items-center ml-3">
+            <div className="flex items-center ml-3">
               {role == 'writer' && (
                 <Button
                   onClick={() => navigate(pathKeys.editor.root())}

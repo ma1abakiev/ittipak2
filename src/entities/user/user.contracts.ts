@@ -30,7 +30,7 @@ export const UserDtoSchema = z.object({
   lastLogin: z.string(), // Consider adjusting to Date if needed
   isSuperuser: z.boolean(),
   username: z.string(),
-  isStaff: z.boolean(),
+  role: z.string(),
   isActive: z.boolean(),
   dateJoined: z.string(), // Consider adjusting to Date if needed
   email: z.string().email(),

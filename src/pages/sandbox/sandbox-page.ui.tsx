@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { CreateArticle } from '~widgets/create-article'
 import {
-  Container,
   Stepper,
   Step,
   StepLabel,
@@ -25,10 +24,10 @@ const steps = ['Составление статьи', 'Публикация ст
 
 function Page() {
   const { data: userData } = userQueries.useLoginUserQuery()
-  const role = userData?.data?.isStaff
+  const role = userData?.data?.role
   const navigate = useNavigate()
 
-  if (!role) {
+  if (role != 'writer') {
     navigate(pathKeys.home())
   }
 
@@ -65,13 +64,14 @@ function Page() {
         }
       }
 
-      const trimmedSubtitle = firstParagraphText.substring(0, 50).toString()
+      const trimmedSubtitle = firstParagraphText.substring(0, 100).toString()
+      const trimmedTitle = title.substring(0, 50).toString()
 
       const imageBlob = localStorage.getItem('savedImage')
       const file = await URLtoFile(imageBlob, imageBlob)
       const formData = new FormData()
       formData.append('photo', file)
-      formData.append('title', title)
+      formData.append('title', trimmedTitle)
       formData.append('subtitle', trimmedSubtitle)
       formData.append('body', JSON.stringify(blocks))
       formData.append('readTime', calculateReadingTime(blocks).toString())
@@ -87,7 +87,7 @@ function Page() {
 
   return (
     <div className="my-20">
-      <Container maxWidth="lg" className="min-h-[700px]">
+      <div className="min-h-[700px] container">
         <StepperView activeStep={activeStep} />
         {activeStep === 0 && (
           <div className="w-full my-5 flex flex-col bg-[white] border border-sc-100 p-5 rounded">
@@ -135,7 +135,7 @@ function Page() {
             </div>
           </div>
         )}
-      </Container>
+      </div>
     </div>
   )
 }

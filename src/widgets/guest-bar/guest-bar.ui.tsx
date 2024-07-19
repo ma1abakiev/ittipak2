@@ -9,18 +9,15 @@ export function GuestBar() {
       <div className="container">
         <Toolbar disableGutters className="flex justify-between">
           <Box className="flex items-center">
-            <Link
-              to={pathKeys.home()}
-              className="font-bold text-xl md:block hidden"
-            >
+            <Link to={pathKeys.home()} className="font-bold text-xl block ">
               <img
                 src="../../../public/ittipak_page-0001.svg"
-                className="w-16"
+                className="min-w-16 max-w-16"
                 alt=""
               />
             </Link>
           </Box>
-          <div className="flex gap-5 ">
+          <div className="flex gap-5  md-max:hidden">
             <Link to={pathKeys.favorites()}>
               <Typography
                 aria-label="navigate to favorites article page"

@@ -1,4 +1,4 @@
-import { Avatar, Container, Paper } from '@mui/material'
+import { Avatar,  Paper } from '@mui/material'
 import { userQueries } from '~entities/user'
 
 export function ProfilePage() {
@@ -17,7 +17,7 @@ export function ProfilePage() {
   const { email, firstName, lastName, photo, username } = userData.data
 
   return (
-    <Container maxWidth="lg" className="my-20">
+    <div className="container">
       <Paper
         elevation={3}
         className="w-[50%] mx-auto bg-[white] border-[1px]  rounded flex  items-center  p-10 gap-10"
@@ -34,6 +34,6 @@ export function ProfilePage() {
           <h2 className="text-sm text-gray">mail: {email}</h2>
         </div>
       </Paper>
-    </Container>
+    </div>
   )
 }

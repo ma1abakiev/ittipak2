@@ -15,13 +15,12 @@ export const EditButton = ({ id }) => {
     return <div>Error fetching user data.</div>
   }
 
-
   const handlePath = () => {
     navigate(`/article/edit/${id}/`)
   }
 
-  const { isStaff } = userData.data
-  if (isStaff) {
+  const { role } = userData.data
+  if (role == 'writer') {
     return (
       <IconButton onClick={handlePath}>
         <EditIcon />

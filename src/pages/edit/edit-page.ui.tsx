@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Container, Paper } from '@mui/material'
+import { Button, CircularProgress,  Paper } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -86,7 +86,7 @@ export function EditPage() {
   }
 
   return (
-    <Container maxWidth="lg" className="my-20 bg-[white]  ">
+    <div className="my-20 bg-[white] container ">
       <Paper elevation={10} className="p-10 ">
         {isSuccess && articleData && (
           <>
@@ -117,6 +117,6 @@ export function EditPage() {
           </>
         )}
       </Paper>
-    </Container>
+    </div>
   )
 }

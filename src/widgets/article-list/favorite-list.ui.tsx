@@ -16,6 +16,7 @@ import { FavoriteButton } from '~features/article/favorite-button'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled'
 import { EditButton } from '~features/article/edit-button'
+import { userQueries } from '~entities/user'
 
 dayjs.locale('ru')
 
@@ -63,24 +64,18 @@ export function FavoriteArticlesList() {
 type ArticleCardProps = { article: articleTypes.Article }
 
 function ArticleCard(props: ArticleCardProps) {
+  const { data: userData } = userQueries.useLoginUserQuery()
+  console.log(props)
+
   return (
     <Paper
       elevation={10}
       className="min-w-full max-w-full  shadow-none p-2 card"
     >
-      <div className="flex flex-col-reverse md:flex-row items-center md:justify-between">
-        <CardContent className="md:p-[12px] p-2">
+      <div className="flex  justify-between">
+        <CardContent className="p-[12px] ">
           <div className="flex justify-between items-center pb-3">
-            <div className="flex flex-col md:flex-row md:items-center gap-3">
-              <div className="flex items-center gap-4 cursor-pointer">
-                <div className="flex items-center"></div>
-                <Tooltip title="Время чтения">
-                  <p className="text-md text-pc-400 flex items-center md:hidden gap-1 text-sm">
-                    <AccessTimeFilledIcon className="w-4" />
-                    {props.article.readTime} мин
-                  </p>
-                </Tooltip>
-              </div>
+            <div className="flex  items-center gap-3">
               <div className="flex items-center gap-3">
                 <p className="text-md text-pc-400 text-sm ">
                   {dayjs(props.article.created)
@@ -92,7 +87,7 @@ function ArticleCard(props: ArticleCardProps) {
                   {props.article.viewCount}
                 </p>
                 <Tooltip title="Время чтения">
-                  <p className="text-md text-pc-400 hidden md:flex items-center gap-1 text-sm">
+                  <p className="text-md text-pc-400  flex items-center gap-1 text-sm">
                     <AccessTimeFilledIcon className="w-4" />
                     {props.article.readTime} мин
                   </p>
@@ -121,13 +116,16 @@ function ArticleCard(props: ArticleCardProps) {
                 }}
               />
               <FavoriteButton id={props.article.id} />
-              <EditButton id={props.article.id}></EditButton>
+              {userData &&
+                userData.data.username == props.article.author.username && (
+                  <EditButton id={props.article.id}></EditButton>
+                )}{' '}
             </div>
           </div>
         </CardContent>
         <CardMedia
           component="img"
-          className="w-[95%] md:max-w-[250px] min-h-[230px] max-h-[230px] rounded md:mr-[12px] cursor-pointer"
+          className="max-w-[250px] min-h-[230px] max-h-[230px] rounded mr-[12px] cursor-pointer"
           image={props.article.photo}
           alt={props.article.title}
           title={props.article.title}

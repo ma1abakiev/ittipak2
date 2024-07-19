@@ -38,7 +38,7 @@ export const RecomendationArticlesList = () => {
                 className="w-full h-80 col-span-1 object-cover"
               />
               <CardContent className="col-span-1">
-                <Typography gutterBottom variant="h6" component="div">
+                <Typography gutterBottom variant="h4" component="div">
                   {firstArticle.title}
                 </Typography>
                 <Typography variant="body2">{firstArticle.subtitle}</Typography>
@@ -61,7 +61,7 @@ export const RecomendationArticlesList = () => {
 export const RecomendationCard = ({ photo, title, id }) => {
   return (
     <Link to={`article/${id}`}>
-      <Card className="h-60">
+      <Card className="h-64">
         <CardActionArea className="flex flex-col">
           <CardMedia
             component="img"
@@ -70,7 +70,12 @@ export const RecomendationCard = ({ photo, title, id }) => {
             className="w-[200px] h-[150px]"
           />
           <CardContent>
-            <Typography gutterBottom variant="h6" component="div">
+            <Typography
+              gutterBottom
+              variant="body1"
+              component="div"
+              className="font-bold"
+            >
               {title}
             </Typography>
           </CardContent>

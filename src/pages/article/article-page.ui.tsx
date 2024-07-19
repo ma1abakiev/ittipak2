@@ -1,7 +1,6 @@
 import {
   CardActions,
   CircularProgress,
-  Container,
   Divider,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
@@ -49,11 +48,9 @@ function Page() {
   }
   return (
     <>
-      {/* <Container maxWidth="lg" className="mx-auto my-[65px] "> */}
-      <div className='container'>
-
+      <div className="container">
         {articleData && (
-          <div className="max-w-full  bg-[white] px-2 md:px-5  mb-5">
+          <div className="max-w-full  bg-[white] px-5  mb-5">
             <ArticleInfo article={articleData.data} />
             <Divider />
             {preLoad ? (
@@ -85,14 +82,13 @@ function Page() {
           </div>
         )}
 
-        <div className=" max-w-full  bg-[white] px-2 py-5  md:p-5">
+        <div className=" max-w-full  bg-[white] p-5">
           <h3 className="font-bold text-2xl">Комментарии</h3>
           <CommentForm id={parseInt(id)} />
           <CommentList id={parseInt(id)} />
         </div>
-        </div>
+      </div>
 
-      {/* </Container> */}
     </>
   )
 }

@@ -75,12 +75,12 @@ const ArticleCard = ({ photo, title, subtitle, id, likes, author }) => {
               {subtitle}
             </Typography>
           </Box>
-          <Link to={`article/${id}`} className="mt-10 ">
+          <Link to={`article/${id}`} className="mt-5 ">
             <Button variant="contained" className="bg-uygur">
               Читать дальше
             </Button>
           </Link>
-          <div className="flex items-center justify-between mt-10">
+          <div className="flex items-center justify-between mt-7">
             <div className="flex">
               <LikeButton
                 like={{

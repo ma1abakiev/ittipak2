@@ -70,7 +70,7 @@ export const YouTubeBlock = createReactBlockSpec(
             <div className=''>
               <iframe
                 width="100%"
-                className="w-full h-[200px] md:h-[480px]"
+                className="w-full h-[480px]"
                 src={getYouTubeEmbedUrl(url)}
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               ></iframe>

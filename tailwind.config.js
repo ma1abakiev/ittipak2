@@ -3,9 +3,33 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   important: '#root',
   theme: {
-    container: {
-      center: true,
-      padding: '150px',
+    extend: {
+      screens: {
+        'xs-max': { max: '320px' },
+        'sm-max': { max: '479px' },
+        'md-max': { max: '767px' },
+        'lg-max': { max: '1023px' },
+        'xl-max': { max: '1439px' },
+      },
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: '10px',
+          'xs-max': '20px',
+          'sm-max': '20px',
+          'md-max': '50px',
+          'lg-max': '100px',
+          'xl-max': '150px',
+        },
+
+        screens: {
+          'xs-max': '320px',
+          'sm-max': '480px', // Full width for sm-max screens
+          'md-max': '768px', // Full width for md-max screens
+          'lg-max': '1024px', // Specific width for lg-max screens
+          'xl-max': '1440px', // Specific width for xl-max screens
+        },
+      },
     },
     fontFamily: {
       serif: ['Roboto'],
@@ -13,16 +37,13 @@ export default {
     },
     colors: {
       uygur: '#549DE2',
-      // uygur: '#2d90ed',
       intro: 'rgba(0,0,0,.4)',
       white: '#FEFEFE',
       black: '#020617',
     },
-    extend: {
-      backgroundImage: {
-        'intro-img': "url('./public/mucams.jpeg')",
-        ittipak: "url('./public/ittipak_page-0001.jpg')",
-      },
+    backgroundImage: {
+      'intro-img': "url('./public/mucams.jpeg')",
+      ittipak: "url('./public/ittipak_page-0001.jpg')",
     },
   },
   plugins: [],

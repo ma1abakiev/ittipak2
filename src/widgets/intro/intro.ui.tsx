@@ -7,7 +7,7 @@ export const Intro = () => {
         bg-intro	"
       >
         <div className="container flex items-center  justify-center h-[100vh]">
-          <h2 className="text-[120px]  text-white  text-center">
+          <h2 className="text-[120px]  text-white  text-center md-max:!text-[60px] lg-max:text-[80px]">
             Уйгурский <br /> новостной <br /> портал
           </h2>
         </div>
