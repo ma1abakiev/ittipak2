@@ -51,7 +51,7 @@ export function RegisterPage() {
   }
 
   return (
-    <div className="my-20 w-[400px] bg-[white] mx-auto rounded-md px-5 py-7 border border-uygur">
+    <div className="mt-20 w-[400px] bg-[white] mx-auto rounded-md px-5 py-7 border border-uygur xl-max:mt-5 md-max:w-[300px]">
       <h1 className="font-bold text-center text-2xl text-uygur">Регистрация</h1>
       <Formik
         initialValues={initialUser}

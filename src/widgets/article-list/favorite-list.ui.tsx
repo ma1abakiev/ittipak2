@@ -30,7 +30,7 @@ export function FavoriteArticlesList() {
 
   if (isLoading) {
     return (
-      <div>
+      <div className="my-20">
         <CircularProgress className="w-[50px] mx-auto flex justify-center" />
         <p className="text-center mt-2">Загрузка статей...</p>
       </div>
@@ -72,7 +72,7 @@ function ArticleCard(props: ArticleCardProps) {
       elevation={10}
       className="min-w-full max-w-full  shadow-none p-2 card"
     >
-      <div className="flex  justify-between">
+      <div className="flex  justify-between md-max:flex-col-reverse">
         <CardContent className="p-[12px] ">
           <div className="flex justify-between items-center pb-3">
             <div className="flex  items-center gap-3">
@@ -125,7 +125,7 @@ function ArticleCard(props: ArticleCardProps) {
         </CardContent>
         <CardMedia
           component="img"
-          className="max-w-[250px] min-h-[230px] max-h-[230px] rounded mr-[12px] cursor-pointer"
+          className="max-w-[250px] min-h-[230px] max-h-[230px] rounded mr-[12px] cursor-pointer  md-max:min-w-full"
           image={props.article.photo}
           alt={props.article.title}
           title={props.article.title}

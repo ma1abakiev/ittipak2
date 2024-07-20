@@ -21,7 +21,7 @@ export function LoginPage() {
   } = userQueries.useGetTokenMutation()
 
   return (
-    <div className="my-[200px] bg-[white] w-[400px]  border border-uygur mx-auto rounded-md px-5 py-7 ">
+    <div className="mt-[200px] bg-[white] w-[400px]  border border-uygur mx-auto rounded-md px-5 py-7 lg-max:mt-[100px]  md-max:w-[300px]">
       <h1 className="font-bold text-center text-2xl text-uygur">Авторизация</h1>
       <Formik
         initialValues={initialUser}

@@ -17,7 +17,7 @@ export function GuestBar() {
               />
             </Link>
           </Box>
-          <div className="flex gap-5  md-max:hidden">
+          <div className="flex gap-5  lg-max:hidden">
             <Link to={pathKeys.favorites()}>
               <Typography
                 aria-label="navigate to favorites article page"

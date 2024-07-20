@@ -25,7 +25,7 @@ export function IntroLayout() {
   return (
     <div className="intro relative flex justify-center">
       <img
-        className="object-cover w-full h-full"
+        className="w-full h-[100vh] object-cover"
         src="https://assets-global.website-files.com/5fe213ecc3c56b20a80fa544/62fef44ae4af9319bdb4481d_Muqam-by-Ghazi-Ehmed-1600x1200.jpeg"
         alt=""
       />

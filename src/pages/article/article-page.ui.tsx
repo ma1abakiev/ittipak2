@@ -1,8 +1,4 @@
-import {
-  CardActions,
-  CircularProgress,
-  Divider,
-} from '@mui/material'
+import { CardActions, CircularProgress, Divider } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { articleQueries } from '~entities/article'
@@ -50,7 +46,7 @@ function Page() {
     <>
       <div className="container">
         {articleData && (
-          <div className="max-w-full  bg-[white] px-5  mb-5">
+          <div className="max-w-full  bg-[white] px-5   mb-5">
             <ArticleInfo article={articleData.data} />
             <Divider />
             {preLoad ? (
@@ -62,7 +58,7 @@ function Page() {
               <ArticleViewer body={articleData.data.body} />
             )}
             <div>
-              <CardActions>
+              <CardActions className='flex justify-between'>
                 <LikeButton
                   like={{
                     id: articleData.data.id,
@@ -70,13 +66,15 @@ function Page() {
                     likes: articleData.data.likes,
                   }}
                 />
-                <FavoriteButton id={articleData.data.id} />
+                <div>
+                  <FavoriteButton id={articleData.data.id} />
 
-                <ShareButton
-                  title={articleData.data.title}
-                  id={articleData.data.id}
-                />
-                {isAuth && <EditButton id={articleData.data.id}></EditButton>}
+                  <ShareButton
+                    title={articleData.data.title}
+                    id={articleData.data.id}
+                  />
+                  {isAuth && <EditButton id={articleData.data.id}></EditButton>}
+                </div>
               </CardActions>
             </div>
           </div>
@@ -88,7 +86,6 @@ function Page() {
           <CommentList id={parseInt(id)} />
         </div>
       </div>
-
     </>
   )
 }

@@ -29,3 +29,9 @@ body {
 .slash-menu-item.selected {
   background-color: lightgray;
 }
+
+
+.blocknote-container * {
+  padding: 0 !important;
+  margin: 0 !important;
+}

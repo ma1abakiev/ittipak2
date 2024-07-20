@@ -53,7 +53,7 @@ export function TopBar() {
               alt=""
             />
           </Link>
-          <div className="flex gap-5 ">
+          <div className="flex gap-5 lg-max:hidden">
             <Link to={pathKeys.favorites()}>
               <Typography
                 aria-label="navigate to favorites article page"

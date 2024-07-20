@@ -17,10 +17,11 @@ export function ProfilePage() {
   const { email, firstName, lastName, photo, username } = userData.data
 
   return (
-    <div className="container">
+    <div className="container mt-52">
       <Paper
         elevation={3}
-        className="w-[50%] mx-auto bg-[white] border-[1px]  rounded flex  items-center  p-10 gap-10"
+        className="w-[50%] mx-auto bg-[white] border-[1px]  rounded flex  items-center  p-10 gap-10 md-max:w-full md-max:flex md-max:flex-col lg-max:w-full"
+        
       >
         <Avatar
           className="h-[100px] w-[100px] rounded"

@@ -6,16 +6,16 @@ export default {
     extend: {
       screens: {
         'xs-max': { max: '320px' },
-        'sm-max': { max: '479px' },
-        'md-max': { max: '767px' },
-        'lg-max': { max: '1023px' },
-        'xl-max': { max: '1439px' },
+        'sm-max': { max: '480px' },
+        'md-max': { max: '768px' },
+        'lg-max': { max: '1024px' },
+        'xl-max': { max: '1440px' },
       },
       container: {
         center: true,
         padding: {
           DEFAULT: '10px',
-          'xs-max': '20px',
+          'xs-max': '10px',
           'sm-max': '20px',
           'md-max': '50px',
           'lg-max': '100px',
@@ -23,7 +23,7 @@ export default {
         },
 
         screens: {
-          'xs-max': '320px',
+          'xs-max': '360px',
           'sm-max': '480px', // Full width for sm-max screens
           'md-max': '768px', // Full width for md-max screens
           'lg-max': '1024px', // Specific width for lg-max screens

@@ -10,7 +10,7 @@ export function Footer() {
       <div className="py-6 flex justify-between  container">
         <div>
           <p className="font-bold text-black">
-            {new Date().getFullYear()} Doppa
+            {new Date().getFullYear()} Ittipak
           </p>
           <p className="text-sm font-semibold text-black">
             © Legacy by Usta Soft
