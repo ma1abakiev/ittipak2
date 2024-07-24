@@ -23,10 +23,10 @@ export default {
         },
 
         screens: {
-          'xs-max': '360px',
-          'sm-max': '480px', // Full width for sm-max screens
-          'md-max': '768px', // Full width for md-max screens
-          'lg-max': '1024px', // Specific width for lg-max screens
+          // 'xs-max': '400px',
+          // 'sm-max': '480px', // Full width for sm-max screens
+          // 'md-max': '768px', // Full width for md-max screens
+          // 'lg-max': '1024px', // Specific width for lg-max screens
           'xl-max': '1440px', // Specific width for xl-max screens
         },
       },
