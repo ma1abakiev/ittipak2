@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CreateArticle } from '~widgets/create-article'
 import {
   Stepper,
@@ -23,13 +23,15 @@ interface StepperViewProps {
 const steps = ['Составление статьи', 'Публикация статьи']
 
 function Page() {
-  const { data: userData } = userQueries.useLoginUserQuery()
+  const { data: userData, isLoading } = userQueries.useLoginUserQuery()
   const role = userData?.data?.role
   const navigate = useNavigate()
 
-  if (role != 'writer') {
-    navigate(pathKeys.home())
-  }
+  useEffect(() => {
+    if (!isLoading && role !== 'writer') {
+      navigate(pathKeys.home())
+    }
+  }, [isLoading, role, navigate])
 
   const [activeStep, setActiveStep] = useState(0)
 

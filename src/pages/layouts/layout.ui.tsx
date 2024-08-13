@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import { getCookie } from 'typescript-cookie'
 import { GuestBar } from '~widgets/guest-bar'
+import { LanguageSwitcher } from '~widgets/language-switcher'
 import { TopBar } from '~widgets/top-bar'
 
 export const GenericLayout = () => {
@@ -8,7 +9,8 @@ export const GenericLayout = () => {
 
   return (
     <>
-      <div className="flex min-h-[100vh] flex-col justify-between">
+      <div className="flex min-h-[100vh] flex-col ">
+        <LanguageSwitcher></LanguageSwitcher>
         {isAuth ? <TopBar /> : <GuestBar />}
         <div className="mb-10">
           <Outlet></Outlet>
@@ -19,7 +21,11 @@ export const GenericLayout = () => {
 }
 
 export const NakedLayout = () => {
-  return <Outlet></Outlet>
+  return (
+    <>
+      <Outlet></Outlet>
+    </>
+  )
 }
 export function IntroLayout() {
   return (

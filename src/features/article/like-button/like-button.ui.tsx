@@ -6,14 +6,14 @@ import { getCookie } from 'typescript-cookie'
 import { userQueries } from '~entities/user'
 import { useNavigate } from 'react-router-dom'
 import { pathKeys } from '~shared/lib/react-router'
-import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 type LikeButtonProps = { like: articleTypes.ArticleLike }
 
 export function LikeButton(props: LikeButtonProps) {
   const isAuth = getCookie('access')
   const navigate = useNavigate()
-
+  const { t } = useTranslation()
   const redirectToRegisterPage = () => {
     navigate(pathKeys.register())
   }
@@ -44,9 +44,9 @@ export function LikeButton(props: LikeButtonProps) {
         title={
           isAuth
             ? isLikedByUser
-              ? 'Больше не нравится'
-              : 'Нравится'
-            : 'Нужна авторизация'
+              ? t('like.deleteLike')
+              : t('like.addLike')
+            : t('like.registerPrompt')
         }
       >
         <span>

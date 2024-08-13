@@ -30,8 +30,11 @@ body {
   background-color: lightgray;
 }
 
-
 .blocknote-container * {
   padding: 0 !important;
+  margin: 0 !important;
+}
+.blocknote-create  .ProseMirror {
+  padding: 10px !important;
   margin: 0 !important;
 }

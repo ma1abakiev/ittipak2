@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-
 import {
   Box,
   IconButton,
@@ -9,17 +8,18 @@ import {
   MenuItem,
   Tooltip,
 } from '@mui/material';
-
 import ShareIcon from '@mui/icons-material/Share';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import InsertLinkIcon from '@mui/icons-material/InsertLink';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import { useTranslation } from 'react-i18next';
 
 type ShareButtonProps = {
   id: number;
 };
 
 export function ShareButton(props: ShareButtonProps) {
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -36,12 +36,12 @@ export function ShareButton(props: ShareButtonProps) {
     navigator.clipboard
       .writeText(articlePath)
       .then(() => {
-        toast.success('Путь скопирован в буфер обмена');
+        toast.success(t('copyLinkSuccess'));
         setAnchorEl(null);
       })
       .catch((error) => {
         console.error('Ошибка при копировании пути: ', error);
-        toast.error('Ошибка при копировании пути');
+        toast.error(t('copyLinkError'));
       });
   };
 
@@ -60,9 +60,9 @@ export function ShareButton(props: ShareButtonProps) {
 
   return (
     <>
-      <Tooltip title="Поделиться">
+      <Tooltip title={t('share')}>
         <IconButton
-          aria-label="поделиться"
+          aria-label={t('share')}
           onClick={handleClick}
           id="basic-button"
           aria-controls={open ? 'basic-menu' : undefined}
@@ -86,13 +86,13 @@ export function ShareButton(props: ShareButtonProps) {
             <ListItemIcon>
               <InsertLinkIcon fontSize="small" />
             </ListItemIcon>
-            Скопировать ссылку
+            {t('copyLink')}
           </MenuItem>
           <MenuItem onClick={() => handleShareClick('telegram')}>
             <ListItemIcon>
               <TelegramIcon fontSize="small" color="primary" />
             </ListItemIcon>
-            Отправить в Telegram
+            {t('sendTelegram')}
           </MenuItem>
           <MenuItem
             onClick={() => handleShareClick('whatsapp')}
@@ -101,7 +101,7 @@ export function ShareButton(props: ShareButtonProps) {
             <ListItemIcon>
               <WhatsAppIcon fontSize="small" color="success" />
             </ListItemIcon>
-            Отправить в WhatsApp
+            {t('sendWhatsApp')}
           </MenuItem>
         </Box>
       </Menu>

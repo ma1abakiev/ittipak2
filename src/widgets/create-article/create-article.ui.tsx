@@ -143,31 +143,33 @@ export function CreateArticle() {
       Загрузка...
     </div>
   ) : (
-    <BlockNoteView
-      data-changing-font-demo
-      slashMenu={false}
-      editor={editor}
-      theme={'light'}
-      formattingToolbar={false}
-      onChange={() => saveToStorage(editor.document)}
-    >
-      <CustomToolbar />
-      <SuggestionMenuController
-        triggerCharacter={'/'}
-        suggestionMenuComponent={CustomSlashMenu}
-        getItems={async (query) =>
-          filterSuggestionItems(
-            [
-              ...getDefaultReactSlashMenuItems(editor),
-              insertYouTubeVideo(editor),
-              insertAlert(editor),
-              insertCode(),
-              insertPDF(editor), // Add PDF insertion to the suggestion menu
-            ],
-            query
-          )
-        }
-      />
-    </BlockNoteView>
+    <div className="blocknote-create">
+      <BlockNoteView
+        data-changing-font-demo
+        slashMenu={false}
+        editor={editor}
+        theme={'light'}
+        formattingToolbar={false}
+        onChange={() => saveToStorage(editor.document)}
+      >
+        <CustomToolbar />
+        <SuggestionMenuController
+          triggerCharacter={'/'}
+          suggestionMenuComponent={CustomSlashMenu}
+          getItems={async (query) =>
+            filterSuggestionItems(
+              [
+                ...getDefaultReactSlashMenuItems(editor),
+                insertYouTubeVideo(editor),
+                insertAlert(editor),
+                insertCode(),
+                insertPDF(editor), // Add PDF insertion to the suggestion menu
+              ],
+              query
+            )
+          }
+        />
+      </BlockNoteView>
+    </div>
   )
 }

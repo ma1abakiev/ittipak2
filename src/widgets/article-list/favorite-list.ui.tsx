@@ -12,15 +12,16 @@ import { pathKeys } from '~shared/lib/react-router'
 import { articleQueries, articleTypes } from '~entities/article'
 import { LikeButton } from '~features/article/like-button'
 import { FavoriteButton } from '~features/article/favorite-button'
-
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled'
 import { EditButton } from '~features/article/edit-button'
 import { userQueries } from '~entities/user'
+import { useTranslation } from 'react-i18next'
 
 dayjs.locale('ru')
 
 export function FavoriteArticlesList() {
+  const { t } = useTranslation()
   const {
     data: articleData,
     isLoading,
@@ -32,21 +33,21 @@ export function FavoriteArticlesList() {
     return (
       <div className="my-20">
         <CircularProgress className="w-[50px] mx-auto flex justify-center" />
-        <p className="text-center mt-2">Загрузка статей...</p>
+        <p className="text-center mt-2">{t('favoritePage.error')}</p>
       </div>
     )
   }
 
   if (isError) {
-    return <div className="my-20">Error fetching user data.</div>
+    return <div className="my-20">{t('error')}</div>
   }
 
   const articles = articleData?.data?.favoriteArticles
 
-  if (articles.length == 0) {
+  if (articles.length === 0) {
     return (
       <div className="text-center font-medium">
-        К сожалению, у вас нет избранных статей📖
+        {t('favoritePage.error')}
       </div>
     )
   }
@@ -64,8 +65,8 @@ export function FavoriteArticlesList() {
 type ArticleCardProps = { article: articleTypes.Article }
 
 function ArticleCard(props: ArticleCardProps) {
+  const { t } = useTranslation()
   const { data: userData } = userQueries.useLoginUserQuery()
-  console.log(props)
 
   return (
     <Paper
@@ -86,10 +87,10 @@ function ArticleCard(props: ArticleCardProps) {
                   <VisibilityIcon className="w-5" />
                   {props.article.viewCount}
                 </p>
-                <Tooltip title="Время чтения">
+                <Tooltip title={t('commentary.title')}>
                   <p className="text-md text-pc-400  flex items-center gap-1 text-sm">
                     <AccessTimeFilledIcon className="w-4" />
-                    {props.article.readTime} мин
+                    {props.article.readTime} {t('commentary.title')}
                   </p>
                 </Tooltip>
               </div>
@@ -117,9 +118,9 @@ function ArticleCard(props: ArticleCardProps) {
               />
               <FavoriteButton id={props.article.id} />
               {userData &&
-                userData.data.username == props.article.author.username && (
+                userData.data.username === props.article.author.username && (
                   <EditButton id={props.article.id}></EditButton>
-                )}{' '}
+                )}
             </div>
           </div>
         </CardContent>

@@ -1,0 +1,109 @@
+{
+  "welcome": "Uyghur News Portal",
+  "header": {
+    "favorite": "FAVORITES",
+    "about.us": "ABOUT US",
+    "write": "Write",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "recomendation": "Recommendations",
+  "feed": "Feed",
+  "banner": {
+    "title": "BANNER",
+    "subtitle": "YOUR AD COULD BE HERE",
+    "button": "ORDER"
+  },
+  "favoritePage": {
+    "title": "Your Favorite Articles",
+    "error": "Unfortunately, you have no favorite articles 📖"
+  },
+  "commentary": {
+    "loadingComments": "Loading comments...",
+    "errorLoadingComments": "Error loading comments!",
+    "firstComment": "Your comment will be the first 😀",
+    "deleteComment": "Delete"
+  },
+  "commentForm": {
+    "registerPrompt": "Register on Ittipak",
+    "commentPrompt": "to leave a comment",
+    "placeholder": "Comment",
+    "sending": "Sending...",
+    "submit": "Submit",
+    "error": "Error while processing request"
+  },
+  "loading": {
+    "article": "Loading article.",
+    "loading": "Loading..."
+  },
+  "error": {
+    "fetchArticle": "Error fetching article data."
+  },
+  "comments": {
+    "title": "Comments"
+  },
+  "like": {
+    "deleteLike": "Don't like it anymore",
+    "addLike": "Like",
+    "registerPrompt": "Authorization required"
+  },
+  "favoriteButton": {
+    "loginRequired": "Authorization Required",
+    "addToFavorites": "Add to Favorites",
+    "removeFromFavorites": "Remove from Favorites"
+  },
+  "share": "Share",
+  "copyLink": "Copy Link",
+  "sendTelegram": "Send to Telegram",
+  "sendWhatsApp": "Send to WhatsApp",
+  "copyLinkSuccess": "Link copied to clipboard",
+  "copyLinkError": "Error copying link",
+  "aboutUs": {
+    "title": "About Us",
+    "introduction": "My name is Malabakiyev Ramzan Kamildjanovich. I am an Uyghur from Kyrgyzstan, an active member of the Uyghur Society 'Ittipak', and a participant of the 'Usta Soft' team. Inspired by the idea of creating a platform for the Uyghur community, my team and I decided to create the news site Ittipak. This project was developed by me for free and on my own initiative to provide the Uyghur people with fresh and current news.",
+    "projectName": "Ittipak",
+    "description": "- is not just a news site, it is a platform that connects Uyghurs wherever they are. Our goal is to provide reliable news, analytical materials, and coverage of events that are important to our community. We strive to support cultural identity, share important information, and promote the unity of our people. Moreover, we actively spread information about the rich history, culture, customs, and traditions of the Uyghur people to preserve and pass on this heritage to future generations.",
+    "supportTitle": "Support the Site",
+    "supportIntro": "We welcome any assistance and appreciate your support. If you want to help us develop the Ittipak site and support the work of the 'Usta Soft' team, you can do so by transferring funds to our account details:",
+    "supportDetailsTitle": "Support Details:",
+    "bank": "Bank",
+    "bankName": "‘Commercial bank KYRGYZSTAN’ OJSC (mBank)",
+    "accountNumber": "Account Number",
+    "accountNumberValue": "4177 4901 9075 9326 (VISA)",
+    "recipient": "Recipient",
+    "recipientName": "RAMZAN MALABAKIEV",
+    "thankYou": "Your contribution will help us continue to improve the site, expand its capabilities, and provide high-quality content to all our users. Thank you for your trust and support!",
+    "signOff": "Sincerely, Malabakiyev Ramzan Kamildjanovich and the 'Usta Soft' team"
+  },
+  "profile": {
+    "loading": "Loading...",
+    "error": "Error loading user data.",
+    "nickname": "Nickname",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email"
+  },
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Enter password",
+    "sending": "Sending...",
+    "error": "Error while processing request",
+    "register": "Register",
+    "submit": "Login"
+  },
+  "register": {
+    "title": "Register",
+    "email": "Email",
+    "username": "Username",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "password": "Enter password",
+    "confirmPassword": "Confirm password",
+    "submit": "Register",
+    "emailSent": "A confirmation email has been sent to your email address.",
+    "error": "Error while processing request",
+    "haveAccount": "Already have an account?",
+    "login": "Login"
+  }
+}

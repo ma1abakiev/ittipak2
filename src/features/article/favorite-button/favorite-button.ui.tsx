@@ -6,10 +6,12 @@ import { articleQueries } from '~entities/article'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { pathKeys } from '~shared/lib/react-router'
+import { useTranslation } from 'react-i18next'
 
 type FavoriteButtonProps = { id: number }
 
 export function FavoriteButton(props: FavoriteButtonProps) {
+  const { t } = useTranslation()
   const isAuth = getCookie('access')
   const navigate = useNavigate()
 
@@ -28,11 +30,11 @@ export function FavoriteButton(props: FavoriteButtonProps) {
     await saveFavorite()
   }, [saveFavorite])
 
-  if ( !isAuth) {
+  if (!isAuth) {
     return (
-      <Tooltip title={'Нужна авторизация'}>
+      <Tooltip title={t('favoriteButton.loginRequired')}>
         <span>
-          <IconButton onClick={redirectToRegisterPage} aria-label="В Избранное">
+          <IconButton onClick={redirectToRegisterPage} aria-label={t('favoriteButton.addToFavorites')}>
             <BookmarkAddIcon />
           </IconButton>
         </span>
@@ -54,10 +56,12 @@ export function FavoriteButton(props: FavoriteButtonProps) {
   return (
     <Tooltip
       title={
-        isFavoritedPosts ? 'Удалить из избранных' : 'Сохранить в избранные'
+        isFavoritedPosts
+          ? t('favoriteButton.removeFromFavorites')
+          : t('favoriteButton.addToFavorites')
       }
     >
-      <IconButton onClick={handleSaveFavorite} aria-label="В Избранное">
+      <IconButton onClick={handleSaveFavorite} aria-label={t('favoriteButton.addToFavorites')}>
         {isFavoritedPosts ? (
           <BookmarkAddedIcon className="text-uygur" />
         ) : (

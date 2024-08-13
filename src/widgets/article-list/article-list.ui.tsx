@@ -1,6 +1,7 @@
 import Card from '@mui/material/Card'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
+
 import {
   Avatar,
   Box,
@@ -8,6 +9,7 @@ import {
   CardActionArea,
   CardActions,
   Tooltip,
+  CircularProgress,
 } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { articleQueries } from '~entities/article'
@@ -18,8 +20,10 @@ import { EditButton } from '~features/article/edit-button'
 import { userQueries } from '~entities/user'
 import dayjs from 'dayjs'
 import { Visibility, AccessTimeFilled } from '@mui/icons-material/'
+import { useTranslation } from 'react-i18next'
 
 export const ArticleList = () => {
+  const { t } = useTranslation()
   const {
     data: articleData,
     isLoading,
@@ -28,16 +32,21 @@ export const ArticleList = () => {
   } = articleQueries.useGetArticles()
 
   if (isLoading) {
-    return <h1>Идёт загрузка Статей</h1>
+    return (
+      <div>
+        <CircularProgress className="w-[50px] mt-20 mx-auto flex justify-center" />
+        <p className="text-center mt-2">{t('loading.article')}</p>
+      </div>
+    )
   }
-  if (isError) {
-    return <h1>Произошла ошибка</h1>
+  if (isError || !articleData) {
+    return <div className="my-20 text-center">{t('error.fetchArticle')}</div>
   }
 
   if (isSuccess) {
     return (
       <section className="mt-20">
-        <h2 className="text-center text-4xl">Лента</h2>
+        <h2 className="text-center text-4xl">{t('feed')}</h2>
         <Box className="flex flex-col gap-y-10 mt-10">
           {articleData.data.results.map((article) => {
             return <ArticleCard key={article.id} {...article} />

@@ -16,8 +16,10 @@ import { removeCookie } from 'typescript-cookie'
 import { pathKeys } from '~shared/lib/react-router'
 import { userQueries } from '~entities/user'
 import { MenuRounded } from '@mui/icons-material/'
+import { useTranslation } from 'react-i18next'
 
 export function TopBar() {
+  const { t } = useTranslation()
   const { data: userData } = userQueries.useLoginUserQuery()
   const {
     data: { firstName = '', lastName = '', role = '', photo = '' } = {},
@@ -51,7 +53,7 @@ export function TopBar() {
   }
 
   return (
-    <AppBar position="fixed" className="bg-[#2d90ed'] py-1">
+    <AppBar position="sticky" className="bg-[#2d90ed'] py-1">
       <div className="container">
         <Toolbar disableGutters className="flex justify-between">
           <div className="hidden lg-max:block">
@@ -77,10 +79,10 @@ export function TopBar() {
               }}
             >
               <Link onClick={handleClose} to={pathKeys.favorites()}>
-                <MenuItem>ИЗБРАННЫЕ</MenuItem>
+                <MenuItem>{t('header.favorite')}</MenuItem>
               </Link>
               <Link onClick={handleClose} to={pathKeys.aboutUs()}>
-                <MenuItem>О НАС</MenuItem>
+                <MenuItem>{t('header.about.us')}</MenuItem>
               </Link>
             </Menu>
           </div>
@@ -97,22 +99,22 @@ export function TopBar() {
                 aria-label="navigate to favorites article page"
                 className="text-white"
               >
-                ИЗБРАННЫЕ
+                {t('header.favorite')}
               </Typography>
             </Link>
             <Link to={pathKeys.aboutUs()}>
               <Typography
-                aria-label="navigate to favorites article page"
+                aria-label="navigate to about us page"
                 className="text-white"
               >
-                О НАС
+                {t('header.about.us')}
               </Typography>
             </Link>
           </div>
 
           <div className="flex gap-4">
             <div className="flex items-center ml-3">
-              {role == 'writer' && (
+              {role === 'writer' && (
                 <Button
                   onClick={() => navigate(pathKeys.editor.root())}
                   size="small"
@@ -120,12 +122,12 @@ export function TopBar() {
                   endIcon={<EditIcon color="white" />}
                   className="border-white text-white hover:scale-105 transition-all lg-max:hidden"
                 >
-                  Написать
+                  {t('header.write')}
                 </Button>
               )}
             </div>
             <div>
-              <Tooltip title="Открыть профиль">
+              <Tooltip title={t('header.profile')}>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt={`${firstName} ${lastName}`} src={photo} />
                 </IconButton>
@@ -140,14 +142,16 @@ export function TopBar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                <MenuItem onClick={handleCloseUserMenu}>Профиль</MenuItem>
-                <MenuItem onClick={handleLogout}>Выйти</MenuItem>
-                {role == 'writer' && (
+                <MenuItem onClick={handleCloseUserMenu}>{t('header.profile')}</MenuItem>
+                <MenuItem onClick={handleLogout}>{t('header.logout')}</MenuItem>
+                {role === 'writer' && (
                   <MenuItem
-                    className="lg-max:block gap-2"
-                    onClick={() => navigate(pathKeys.editor.root())}
+                    onClick={() => {
+                      handleCloseUserMenu()
+                      navigate(pathKeys.editor.root())
+                    }}
                   >
-                    Написать
+                    <div className="hidden lg-max:block">{t('header.write')}</div>
                   </MenuItem>
                 )}
               </Menu>

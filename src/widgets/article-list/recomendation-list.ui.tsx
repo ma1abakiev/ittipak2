@@ -3,11 +3,14 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
-import { CardActionArea } from '@mui/material'
+import { CardActionArea, CircularProgress } from '@mui/material'
 import { Link } from 'react-router-dom'
 import Marquee from 'react-fast-marquee'
+import { useTranslation } from 'react-i18next'
 
 export const RecomendationArticlesList = () => {
+  const { t } = useTranslation()
+
   const {
     data: articleData,
     isLoading,
@@ -16,20 +19,25 @@ export const RecomendationArticlesList = () => {
   } = articleQueries.useGetArticles()
 
   if (isLoading) {
-    return <h1>Идёт загрузка Статей</h1>
+    return (
+      <div>
+        <CircularProgress className="w-[50px] mt-20 mx-auto flex justify-center" />
+        <p className="text-center mt-2">{t('loading.article')}</p>
+      </div>
+    )
   }
-  if (isError) {
-    return <h1>Произошла ошибка</h1>
+  if (isError || !articleData) {
+    return <div className="my-20 text-center">{t('error.fetchArticle')}</div>
   }
   const firstArticle = articleData.data.results[0]
 
   if (isSuccess) {
     return (
       <>
-        <h2 className="text-center text-4xl mb-10">Рекомендации</h2>
+        <h2 className="text-center text-4xl mb-10">{t('recomendation')}</h2>
         <Link to={`article/${firstArticle.id}`}>
-          <Card className='shadow-none'>
-            <CardActionArea className="grid grid-cols-2 lg-max:grid-cols-1 ">
+          <Card className="shadow-none">
+            <CardActionArea className="grid grid-cols-2 lg-max:grid-cols-1">
               <CardMedia
                 component="img"
                 image={firstArticle.photo}
@@ -56,11 +64,11 @@ export const RecomendationArticlesList = () => {
           direction="left"
           speed={100}
           pauseOnHover={true}
-          className="my-5 p-5 "
+          className="my-5 p-5"
         >
           {articleData.data.results.map((article, i) => {
             if (i <= 4 && i > 0) {
-              return <RecomendationCard {...article}></RecomendationCard>
+              return <RecomendationCard {...article} key={article.id} />
             }
           })}
         </Marquee>
@@ -70,6 +78,7 @@ export const RecomendationArticlesList = () => {
 }
 
 export const RecomendationCard = ({ photo, title, id }) => {
+  const { t } = useTranslation()
   return (
     <Link to={`article/${id}`}>
       <Card className="h-64 mx-10 w-52 shadow-none">

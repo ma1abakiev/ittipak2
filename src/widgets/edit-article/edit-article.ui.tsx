@@ -127,30 +127,32 @@ export function EditArticle(props: EditArticleProps) {
       Загрузка...
     </div>
   ) : (
-    <BlockNoteView
-      data-changing-font-demo
-      slashMenu={false}
-      editor={editor}
-      theme={'light'}
-      formattingToolbar={false}
-      onChange={() => saveToStorage(editor.document)}
-    >
-      <CustomToolbar />
-      <SuggestionMenuController
-        triggerCharacter={'/'}
-        suggestionMenuComponent={CustomSlashMenu}
-        getItems={async (query: string) =>
-          filterSuggestionItems(
-            [
-              ...getDefaultReactSlashMenuItems(editor),
-              insertYouTubeVideo(editor),
-              insertAlert(editor),
-              insertCode(),
-            ],
-            query
-          )
-        }
-      />
-    </BlockNoteView>
+    <div className="blocknote-create">
+      <BlockNoteView
+        data-changing-font-demo
+        slashMenu={false}
+        editor={editor}
+        theme={'light'}
+        formattingToolbar={false}
+        onChange={() => saveToStorage(editor.document)}
+      >
+        <CustomToolbar />
+        <SuggestionMenuController
+          triggerCharacter={'/'}
+          suggestionMenuComponent={CustomSlashMenu}
+          getItems={async (query: string) =>
+            filterSuggestionItems(
+              [
+                ...getDefaultReactSlashMenuItems(editor),
+                insertYouTubeVideo(editor),
+                insertAlert(editor),
+                insertCode(),
+              ],
+              query
+            )
+          }
+        />
+      </BlockNoteView>
+    </div>
   )
 }

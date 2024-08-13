@@ -14,6 +14,7 @@ import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import { useState } from 'react'
 import { setCookie } from 'typescript-cookie'
+import { useTranslation } from 'react-i18next'
 
 const initialUser: userTypes.CreateUserSchema = {
   email: '',
@@ -24,6 +25,7 @@ const initialUser: userTypes.CreateUserSchema = {
 }
 
 export function RegisterPage() {
+  const { t } = useTranslation()
   const [visibility, setVisibility] = useState(false)
   const handleClickShowPassword = () =>
     setVisibility((visibility) => !visibility)
@@ -44,7 +46,7 @@ export function RegisterPage() {
     return (
       <div className="my-20 w-[400px] bg-[white] mx-auto rounded-md px-5 py-7 border border-sc-100">
         <h1 className="font-bold text-center text-2xl text-pc-500">
-          На вашу почту отправлено письмо для подтверждения вашей почты.
+          {t('register.emailSent')}
         </h1>
       </div>
     )
@@ -52,7 +54,9 @@ export function RegisterPage() {
 
   return (
     <div className="mt-20 w-[400px] bg-[white] mx-auto rounded-md px-5 py-7 border border-uygur xl-max:mt-5 md-max:w-[300px]">
-      <h1 className="font-bold text-center text-2xl text-uygur">Регистрация</h1>
+      <h1 className="font-bold text-center text-2xl text-uygur">
+        {t('register.title')}
+      </h1>
       <Formik
         initialValues={initialUser}
         validate={validateForm}
@@ -69,7 +73,7 @@ export function RegisterPage() {
                 fullWidth
                 id="email"
                 name="email"
-                label="Email"
+                label={t('register.email')}
                 size="small"
               />
               <ErrorMessage
@@ -84,7 +88,7 @@ export function RegisterPage() {
                 fullWidth
                 id="username"
                 name="username"
-                label="Псевдоним"
+                label={t('register.username')}
                 size="small"
               />
               <ErrorMessage
@@ -99,7 +103,7 @@ export function RegisterPage() {
                 fullWidth
                 id="firstName"
                 name="firstName"
-                label="Имя"
+                label={t('register.firstName')}
                 size="small"
               />
               <ErrorMessage
@@ -115,7 +119,7 @@ export function RegisterPage() {
                 id="lastName"
                 name="lastName"
                 size="small"
-                label="Фамилия"
+                label={t('register.lastName')}
               />
               <ErrorMessage
                 name="lastName"
@@ -129,7 +133,7 @@ export function RegisterPage() {
                 fullWidth
                 id="password"
                 name="password"
-                label="Введите пароль"
+                label={t('register.password')}
                 type={visibility ? 'text' : 'password'}
                 size="small"
                 InputProps={{
@@ -157,7 +161,7 @@ export function RegisterPage() {
                 fullWidth
                 id="confirmPassword"
                 name="confirmPassword"
-                label="Подтвердите пароль"
+                label={t('register.confirmPassword')}
                 type={visibility ? 'text' : 'password'}
                 size="small"
               />
@@ -173,13 +177,13 @@ export function RegisterPage() {
       </Formik>
       {isError && (
         <p className="text-center text-xs text-[red]">
-          Ошибка при выполнении запроса
+          {t('register.error')}
         </p>
       )}
       <p className="flex justify-center gap-1">
-        Уже есть аккаунт?
+        {t('register.haveAccount')}
         <Link className="underline text-second-100" to={pathKeys.login()}>
-          Войти
+          {t('register.login')}
         </Link>
       </p>
     </div>
@@ -188,6 +192,7 @@ export function RegisterPage() {
 
 function SubmitButton() {
   const { isValidating, isValid } = useFormikContext()
+  const { t } = useTranslation()
   return (
     <Button
       variant="contained"
@@ -195,7 +200,7 @@ function SubmitButton() {
       className="w-full mb-2 bg-second-100"
       disabled={!isValid || isValidating}
     >
-      Зарегистрироваться
+      {t('register.submit')}
     </Button>
   )
 }
@@ -211,7 +216,7 @@ const validateForm = (values) => {
 
   if (!values.username) {
     errors.username = 'Обязательное поле'
-  } else if (values.lastName.length < 3) {
+  } else if (values.username.length < 3) {
     errors.username = 'Псевдоним должен содержать минимум 3 символа'
   }
 

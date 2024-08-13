@@ -14,11 +14,13 @@ import { FavoriteButton } from '~features/article/favorite-button'
 import { ShareButton } from '~features/article/share-button'
 import { EditButton } from '~features/article/edit-button'
 import { getCookie } from 'typescript-cookie'
+import { useTranslation } from 'react-i18next'
 
 function Page() {
   const { id } = useParams()
   const [preLoad, setPreLoad] = useState(true)
   const isAuth = getCookie('access')
+  const { t } = useTranslation()
 
   useEffect(() => {
     setPreLoad(false)
@@ -34,25 +36,26 @@ function Page() {
     return (
       <div>
         <CircularProgress className="w-[50px] mt-20 mx-auto flex justify-center" />
-        <p className="text-center mt-2">Загрузка статьи.</p>
+        <p className="text-center mt-2">{t('loading.article')}</p>
       </div>
     )
   }
 
   if (isError || !articleData) {
-    return <div className="my-20 text-center">Error fetching article data.</div>
+    return <div className="my-20 text-center">{t('error.fetchArticle')}</div>
   }
+  
   return (
     <>
       <div className="container">
         {articleData && (
-          <div className="max-w-full  bg-[white] px-5   mb-5">
+          <div className="max-w-full bg-[white] px-5 mb-5">
             <ArticleInfo article={articleData.data} />
             <Divider />
             {preLoad ? (
               <div className="flex flex-col items-center gap-3 my-20">
                 <CircularProgress />
-                Загрузка...
+                {t('loading.loading')}
               </div>
             ) : (
               <ArticleViewer body={articleData.data.body} />
@@ -68,7 +71,6 @@ function Page() {
                 />
                 <div>
                   <FavoriteButton id={articleData.data.id} />
-
                   <ShareButton
                     title={articleData.data.title}
                     id={articleData.data.id}
@@ -80,8 +82,8 @@ function Page() {
           </div>
         )}
 
-        <div className=" max-w-full  bg-[white] p-5">
-          <h3 className="font-bold text-2xl">Комментарии</h3>
+        <div className="max-w-full bg-[white] p-5">
+          <h3 className="font-bold text-2xl">{t('comments.title')}</h3>
           <CommentForm id={parseInt(id)} />
           <CommentList id={parseInt(id)} />
         </div>
@@ -91,8 +93,10 @@ function Page() {
 }
 
 function Loader() {
-  return <div className="my-20">loading...</div>
+  const { t } = useTranslation()
+  return <div className="my-20">{t('loading.loading')}</div>
 }
+
 const SuspensedPage = withSuspense(Page, {
   fallback: <Loader />,
 })

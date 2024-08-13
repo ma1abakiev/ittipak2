@@ -1,4 +1,8 @@
+import { useTranslation } from 'react-i18next'
+
 export const Intro = () => {
+  const { t } = useTranslation()
+
   return (
     <>
       <section
@@ -7,8 +11,8 @@ export const Intro = () => {
         bg-intro	"
       >
         <div className="container flex items-center  justify-center h-[100vh]">
-          <h2 className="text-[120px]  text-white  text-center md-max:!text-[60px] lg-max:text-[80px]">
-            Уйгурский <br /> новостной <br /> портал
+          <h2 className="text-[120px]  text-white max-w-[600px]  text-center md-max:!text-[60px] lg-max:text-[80px]">
+            {t('welcome')}{' '}
           </h2>
         </div>
       </section>

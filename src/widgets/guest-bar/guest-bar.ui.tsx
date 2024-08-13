@@ -12,21 +12,25 @@ import {
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { pathKeys } from '~shared/lib/react-router'
+import { useTranslation } from 'react-i18next'
 
 export function GuestBar() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
+  
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
   }
+  
   const handleClose = () => {
     setAnchorEl(null)
   }
 
   return (
-    <AppBar position="fixed" className="bg-[#2d90ed'] py-1">
+    <AppBar position="fixed" className="bg-[#2d90ed] py-1">
       <div className="container">
         <Toolbar disableGutters className="flex justify-between">
           <div className="hidden lg-max:block">
@@ -51,38 +55,38 @@ export function GuestBar() {
                 'aria-labelledby': 'basic-button',
               }}
             >
-              <Link onClick={handleClose} to={pathKeys.favorites()}>
-                <MenuItem>ИЗБРАННЫЕ</MenuItem>
-              </Link>
-              <Link onClick={handleClose} to={pathKeys.aboutUs()}>
-                <MenuItem>О НАС</MenuItem>
-              </Link>
+              <MenuItem onClick={handleClose} component={Link} to={pathKeys.favorites()}>
+                {t('header.favorite')}
+              </MenuItem>
+              <MenuItem onClick={handleClose} component={Link} to={pathKeys.aboutUs()}>
+                {t('header.about.us')}
+              </MenuItem>
             </Menu>
           </div>
           <Box className="flex items-center">
-            <Link to={pathKeys.home()} className="font-bold text-xl block ">
+            <Link to={pathKeys.home()} className="font-bold text-xl block">
               <img
-                src="../../../public/ittipak_page-0001.svg"
+                src="/ittipak_page-0001.svg" // Убедитесь, что путь к изображению верен
                 className="min-w-16 max-w-16"
-                alt=""
+                alt={t('welcome')} // Используйте перевод для alt
               />
             </Link>
           </Box>
-          <div className="flex gap-5  lg-max:hidden">
+          <div className="flex gap-5 lg-max:hidden">
             <Link to={pathKeys.favorites()}>
               <Typography
-                aria-label="navigate to favorites article page"
+                aria-label={t('header.favorite')}
                 className="text-white"
               >
-                ИЗБРАННЫЕ
+                {t('header.favorite')}
               </Typography>
             </Link>
             <Link to={pathKeys.aboutUs()}>
               <Typography
-                aria-label="navigate to favorites article page"
+                aria-label={t('header.about.us')}
                 className="text-white"
               >
-                О НАС
+                {t('header.about.us')}
               </Typography>
             </Link>
           </div>
@@ -93,7 +97,7 @@ export function GuestBar() {
               size="small"
               onClick={() => navigate(pathKeys.editor.root())}
             >
-              Войти
+              {t('register.login')} {/* Замените на правильный ключ, если необходимо */}
             </Button>
           </Box>
         </Toolbar>

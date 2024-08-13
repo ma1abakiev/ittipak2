@@ -5,6 +5,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { userQueries } from '~entities/user'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { getCookie } from 'typescript-cookie'
+import { useTranslation } from 'react-i18next'
 
 dayjs.extend(relativeTime)
 
@@ -13,6 +14,7 @@ type CommentListProps = {
 }
 
 export function CommentList({ id }: CommentListProps) {
+  const { t } = useTranslation()
   const {
     data: commentData,
     isLoading,
@@ -24,19 +26,19 @@ export function CommentList({ id }: CommentListProps) {
     return (
       <div>
         <CircularProgress className="w-[50px] mx-auto flex justify-center" />
-        <p className="text-center mt-2">Загрузка комментариев...</p>
+        <p className="text-center mt-2">{t('commentary.loadingComments')}</p>
       </div>
     )
   }
 
   if (isError) {
-    return <p>Ошибка при загрузке комментариев!</p>
+    return <p>{t('commentary.errorLoadingComments')}</p>
   }
 
-  if (commentData.data.length == 0) {
+  if (commentData.data.length === 0) {
     return (
       <div className="font-medium text-pc-400">
-        Ваш комментарий будет первым😀
+        {t('commentary.firstComment')}
       </div>
     )
   }
@@ -59,6 +61,7 @@ function CommentItem({
   comment: commentTypes.Comment
   articleId: number
 }) {
+  const { t } = useTranslation()
   const { data: userData } = userQueries.useLoginUserQuery()
 
   const { mutate: deleteComment, isPending } = commentQueries.useDeleteComment(
@@ -69,8 +72,6 @@ function CommentItem({
     await deleteComment({ articleId: articleId, commentId: comment.id })
   }
   const isAuth = getCookie('access')
-
-  console.log(comment)
 
   return (
     <div>
@@ -90,7 +91,7 @@ function CommentItem({
           {isAuth ? (
             userData.data.username === comment.author ? (
               <IconButton
-                aria-label="delete"
+                aria-label={t('commentary.deleteComment')}
                 size="small"
                 onClick={handleDeleteComment}
               >

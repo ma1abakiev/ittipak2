@@ -8,6 +8,7 @@ import { ErrorMessage, Formik, Form, useFormikContext, useField } from 'formik'
 import { formikContract } from '~shared/lib/zod'
 import { getCookie } from 'typescript-cookie'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 type CommentFormProps = {
   id: number
@@ -24,7 +25,7 @@ const MyTextField: React.FC<MyTextFieldProps> = ({ name, ...props }) => {
       <textarea
         {...field}
         {...props}
-        placeholder="Комментарий"
+        placeholder={useTranslation().t('commentForm.placeholder')}
         className="w-full h-[50px] overflow-auto mb-3 appearance-none border-none outline-none resize-none"
       />
       {meta.touched && meta.error ? (
@@ -35,6 +36,7 @@ const MyTextField: React.FC<MyTextFieldProps> = ({ name, ...props }) => {
 }
 
 export function CommentForm({ id }: CommentFormProps) {
+  const { t } = useTranslation()
   const {
     mutate: createComment,
     isPending,
@@ -53,12 +55,12 @@ export function CommentForm({ id }: CommentFormProps) {
       {!isAuth ? (
         <div className="max-w-[380px] h-[100%] border-l-4 border-pc-500 px-2 my-5">
           <Link className="underline text-second-100" to="/login">
-            Зарегистрируйтесь на Ittipak
+            {t('commentForm.registerPrompt')}
           </Link>
-          , чтобы оставить комментарий
+          , {t('commentForm.commentPrompt')}
         </div>
       ) : (
-        <div className=" border max-w-[380px] min-h-[100px] border-pc-300 rounded p-2 flex flex-col mb-5">
+        <div className="border max-w-[380px] min-h-[100px] border-pc-300 rounded p-2 flex flex-col mb-5">
           <Formik
             initialValues={initialData}
             validate={validateForm}
@@ -80,7 +82,7 @@ export function CommentForm({ id }: CommentFormProps) {
           </Formik>
           {isError && (
             <p className="text-center text-xs text-[red]">
-              Ошибка при выполнении запроса
+              {t('commentForm.error')}
             </p>
           )}
         </div>
@@ -90,6 +92,7 @@ export function CommentForm({ id }: CommentFormProps) {
 }
 
 function SubmitButton({ isPending }) {
+  const { t } = useTranslation()
   const { isValidating, isValid } = useFormikContext()
   return (
     <Button
@@ -99,7 +102,7 @@ function SubmitButton({ isPending }) {
       className="mb-2 bg-second-100 self-end"
       disabled={!isValid || isValidating || isPending}
     >
-      {isPending ? 'Отправка...' : 'Отправить'}
+      {isPending ? t('commentForm.sending') : t('commentForm.submit')}
     </Button>
   )
 }

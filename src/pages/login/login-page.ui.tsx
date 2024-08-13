@@ -7,8 +7,10 @@ import { formikContract } from '~shared/lib/zod'
 import { useState } from 'react'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import { useTranslation } from 'react-i18next'
 
 export function LoginPage() {
+  const { t } = useTranslation()
   const [visibility, setVisibility] = useState(false)
 
   const handleClickShowPassword = () =>
@@ -21,8 +23,8 @@ export function LoginPage() {
   } = userQueries.useGetTokenMutation()
 
   return (
-    <div className="mt-[200px] bg-[white] w-[400px]  border border-uygur mx-auto rounded-md px-5 py-7 lg-max:mt-[100px]  md-max:w-[300px]">
-      <h1 className="font-bold text-center text-2xl text-uygur">Авторизация</h1>
+    <div className="mt-[200px] bg-[white] w-[400px] border border-uygur mx-auto rounded-md px-5 py-7 lg-max:mt-[100px] md-max:w-[300px]">
+      <h1 className="font-bold text-center text-2xl text-uygur">{t('login.title')}</h1>
       <Formik
         initialValues={initialUser}
         validate={validateForm}
@@ -36,7 +38,7 @@ export function LoginPage() {
                 fullWidth
                 id="username"
                 name="username"
-                label="Username"
+                label={t('login.username')}
                 size="small"
               />
               <ErrorMessage name="username" />
@@ -47,7 +49,7 @@ export function LoginPage() {
                 fullWidth
                 id="password"
                 name="password"
-                label="Введите пароль"
+                label={t('login.password')}
                 type={visibility ? 'text' : 'password'}
                 size="small"
                 InputProps={{
@@ -66,19 +68,19 @@ export function LoginPage() {
               <ErrorMessage name="password" />
             </fieldset>
           </fieldset>
-          {isPending ? 'отправка' : <SubmitButton />}
+          {isPending ? t('login.sending') : <SubmitButton />}
         </Form>
       </Formik>
       {isError && (
         <p className="text-center text-xs text-[red]">
-          Ошибка при выполнении запроса
+          {t('login.error')}
         </p>
       )}
       <Link
         className="mt-4 flex justify-center underline text-black"
         to={pathKeys.register()}
       >
-        Пройти регистрацию
+        {t('login.register')}
       </Link>
     </div>
   )
@@ -91,6 +93,7 @@ const initialUser: userTypes.LoginUserDto = {
 
 function SubmitButton() {
   const { isValidating, isValid } = useFormikContext()
+  const { t } = useTranslation()
   return (
     <Button
       variant="contained"
@@ -98,7 +101,7 @@ function SubmitButton() {
       className="w-full mb-2 bg-second-100"
       disabled={!isValid || isValidating}
     >
-      Войти
+      {t('login.submit')}
     </Button>
   )
 }
