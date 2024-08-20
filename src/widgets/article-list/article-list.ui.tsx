@@ -69,6 +69,7 @@ const ArticleCard = ({
   readTime,
 }) => {
   const { data: userData } = userQueries.useLoginUserQuery()
+  const { t } = useTranslation()
 
   return (
     <Card className="w-full shadow-none">
@@ -109,16 +110,16 @@ const ArticleCard = ({
             </div>
             <div className="flex items-center gap-3 mt-3 mx-3">
               <p className="text-md text-pc-400 text-sm ">
-                {dayjs(created).format('MMMM D, YYYY').toUpperCase()}
+                {dayjs(created).format('DD.MM.YYYY').toUpperCase()}
               </p>
               <p className="text-md text-pc-400 flex items-center gap-1 text-sm">
                 <Visibility className="w-5" />
                 {viewCount}
               </p>
-              <Tooltip title="Время чтения">
+              <Tooltip title={t('read_time')}>
                 <p className="text-md text-pc-400  flex items-center gap-1 text-sm">
                   <AccessTimeFilled className="w-4" />
-                  {readTime} мин
+                  {readTime} {t('minute')}
                 </p>
               </Tooltip>
             </div>
@@ -133,7 +134,7 @@ const ArticleCard = ({
           </Box>
           <Link to={`article/${id}`} className="mt-5 ">
             <Button variant="contained" className="bg-uygur">
-              Читать дальше
+              {t('read_btn')}
             </Button>
           </Link>
           <div className="flex items-center justify-between mt-7 w-full lg-max:mb-3">

@@ -2,6 +2,7 @@ import { Box, Button, Modal, Slider } from '@mui/material';
 import Dropzone from 'react-dropzone';
 import AvatarEditor from 'react-avatar-editor';
 import React, { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const boxStyle = {
   width: '770px',
@@ -30,6 +31,7 @@ const CropperModal: React.FC<CropperModalProps> = ({
   modalOpen,
   setModalOpen,
 }) => {
+  const { t } = useTranslation();
   const [slideValue, setSlideValue] = useState<number>(10);
   const cropRef = useRef<AvatarEditor | null>(null);
 
@@ -46,13 +48,7 @@ const CropperModal: React.FC<CropperModalProps> = ({
   return (
     <Modal sx={modalStyle} open={modalOpen}>
       <Box sx={boxStyle}>
-        <AvatarEditor
-          ref={cropRef}
-          image={src || ''}
-          
-         
-          rotate={0}
-        />
+        <AvatarEditor ref={cropRef} image={src || ''} rotate={0} />
         <Slider
           min={10}
           max={50}
@@ -73,7 +69,7 @@ const CropperModal: React.FC<CropperModalProps> = ({
             variant="outlined"
             onClick={() => setModalOpen(false)}
           >
-            cancel
+            {t('cancel')}
           </Button>
           <Button
             sx={{ background: '#5596e6' }}
@@ -81,7 +77,7 @@ const CropperModal: React.FC<CropperModalProps> = ({
             variant="contained"
             onClick={handleSave}
           >
-            Save
+            {t('save')}
           </Button>
         </Box>
       </Box>
@@ -96,6 +92,7 @@ interface CoverCropperProps {
 }
 
 export function CoverCropper({ update, setUpdate, data }: CoverCropperProps) {
+  const { t } = useTranslation();
   const [src, setSrc] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
@@ -119,20 +116,20 @@ export function CoverCropper({ update, setUpdate, data }: CoverCropperProps) {
             alt=""
             className="min-w-[94%] max-w-[100%] min-h-[400px] max-h-[400px] object-cover rounded "
           />
-          <p>Примерное отображения обложки </p>
+          <p>{t('cover_display_large')}</p>
           <img
             src={data}
             alt=""
             className="min-w-[350px] max-w-[350px] min-h-[270px] max-h-[270px] object-cover rounded mt-3"
           />
-          <p>Примерное отображения обложки на маленьких экранах</p>
+          <p>{t('cover_display_small')}</p>
         </div>
         <Button
           variant="outlined"
           className="my-3"
           onClick={() => setUpdate(false)}
         >
-          Выбрать другое фото
+          {t('select_another_photo')}
         </Button>
       </div>
     );
@@ -163,7 +160,7 @@ export function CoverCropper({ update, setUpdate, data }: CoverCropperProps) {
                   isDragActive ? 'text-second-100' : 'text-pc-300'
                 } `}
               >
-                {isDragActive ? '+' : ' Выберите или перетащите файл'}
+                {isDragActive ? t('drop_files_here') : t('select_or_drag_file')}
               </p>
             </div>
           )}
@@ -176,14 +173,14 @@ export function CoverCropper({ update, setUpdate, data }: CoverCropperProps) {
               alt=""
               className="min-w-[700px] max-w-[700px] min-h-[400px] max-h-[400px] object-cover rounded "
             />
-            <p>Примерное отображения обложки на больших экранах</p>
+            <p>{t('cover_display_large')}</p>
           </div>
           <Button
             variant="outlined"
             className="my-3"
             onClick={handleSelectAnotherPhoto}
           >
-            Выбрать другое фото
+            {t('select_another_photo')}
           </Button>
         </div>
       )}

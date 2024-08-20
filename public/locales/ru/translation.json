@@ -107,5 +107,45 @@
     "error": "Ошибка при выполнении запроса",
     "haveAccount": "Уже есть аккаунт?",
     "login": "Войти"
-  }
+  },
+  "title_placeholder": "ЗАГОЛОВОК",
+  "step_create_article": "Составление статьи",
+  "step_publish_article": "Публикация статьи",
+  "button_next": "Далее",
+  "publish_heading": "Публикация",
+  "select_language": "Выберите язык, на котором написана статья",
+  "upload_cover": "Загрузите обложку для статьи",
+  "button_back": "Назад",
+  "sending_data": "Отправка данных...",
+  "button_finish": "Завершить",
+  "language_ru": "Русский",
+  "language_en": "Английский",
+  "language_ug": "Уйгурский", 
+
+  "heading_1": "Заголовок 1",
+  "heading_2": "Заголовок 2",
+  "heading_3": "Заголовок 3",
+  "numbered_list": "Нумерованный список",
+  "bullet_list": "Маркированный список",
+  "paragraph": "Параграф",
+  "table": "Таблица",
+  "image": "Изображение",
+  "video": "Видео",
+  "audio": "Аудио",
+  "check_list": "Список",
+  "file": "Файл", 
+
+  "cancel": "Отменить",
+  "save": "Сохранить",
+  "cover_display_large": "Примерное отображение обложки на больших экранах",
+  "cover_display_small": "Примерное отображение обложки на маленьких экранах",
+  "select_another_photo": "Выбрать другое фото",
+  "drop_files_here": "Перетащите файлы сюда",
+  "select_or_drag_file": "Выберите или перетащите файл",
+
+  "read_btn": "Читать дальше",
+  "read_time": "Время чтения",
+  "minute": "min"
+
+
 }

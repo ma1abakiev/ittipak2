@@ -4,33 +4,34 @@ import {
 } from '@blocknote/react'
 import { Paper } from '@mui/material'
 import { useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
-function getTranslatedText(title: string): string {
+function getTranslatedText(title: string, t: (key: string) => string): string {
   switch (title) {
     case 'Heading 1':
-      return 'Заголовок 1'
+      return t('heading_1')
     case 'Heading 2':
-      return 'Заголовок 2'
+      return t('heading_2')
     case 'Heading 3':
-      return 'Заголовок 3'
+      return t('heading_3')
     case 'Numbered List':
-      return 'Нумерованный список'
+      return t('numbered_list')
     case 'Bullet List':
-      return 'Маркированный список'
+      return t('bullet_list')
     case 'Paragraph':
-      return 'Параграф'
+      return t('paragraph')
     case 'Table':
-      return 'Таблица'
+      return t('table')
     case 'Image':
-      return 'Изображение'
+      return t('image')
     case 'Video':
-      return 'Видео'
+      return t('video')
     case 'Audio':
-      return 'Аудио'
+      return t('audio')
     case 'Check List':
-      return 'Список'
+      return t('check_list')
     case 'File':
-      return 'Файл'
+      return t('file')
     default:
       return title
   }
@@ -40,6 +41,7 @@ export function CustomSlashMenu(
   props: SuggestionMenuProps<DefaultReactSuggestionItem>
 ) {
   const menuRef = useRef<HTMLDivElement>(null)
+  const { t } = useTranslation() // useTranslation вызван непосредственно в компоненте
 
   useEffect(() => {
     if (props.selectedIndex !== undefined && menuRef.current) {
@@ -61,10 +63,6 @@ export function CustomSlashMenu(
       className="slash-menu bg-green max-h-48 overflow-y-auto "
       ref={menuRef}
     >
-      {/* <div
-        className="slash-menu bg-none max-h-48 overflow-y-auto"
-        ref={menuRef}
-      > */}
       {props.items.map((item, index) => (
         <div
           key={index}
@@ -80,12 +78,11 @@ export function CustomSlashMenu(
               {item.icon}
             </div>
             <div className="text-md text-sm font-medium font-serif">
-              {getTranslatedText(item.title)}
+              {getTranslatedText(item.title, t)}
             </div>
           </div>
         </div>
       ))}
-      {/* </div> */}
     </Paper>
   )
 }

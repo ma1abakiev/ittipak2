@@ -4,11 +4,17 @@ import { Chip, Tooltip } from '@mui/material'
 import { articleTypes } from '~entities/article'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ru'
-dayjs.locale('ru')
+import { useTranslation } from 'react-i18next'
+import { getCookie } from 'typescript-cookie'
+
+const savedLanguage = getCookie('language')
+
+dayjs.locale(savedLanguage)
 
 type ArticleInfoProps = { article: articleTypes.Article }
 
 export function ArticleInfo(props: ArticleInfoProps) {
+  const { t } = useTranslation()
   return (
     <div className="flex flex-col-reverse gap-3 py-4">
       <div>
@@ -21,10 +27,10 @@ export function ArticleInfo(props: ArticleInfoProps) {
               <VisibilityIcon className="w-5" />
               {props.article.viewCount}
             </p>
-            <Tooltip title="Время чтения">
+            <Tooltip title={t('read_time')}>
               <p className="text-pc-400 flex items-center gap-1 text-sm">
                 <AccessTimeFilledIcon className="w-4" />
-                {props.article.readTime} мин
+                {props.article.readTime} {t('minute')}
               </p>
             </Tooltip>
           </div>
@@ -45,7 +51,7 @@ export function ArticleInfo(props: ArticleInfoProps) {
           {props.article.title}
         </h1>
       </div>
-      
+
       <img
         className="min-h-[300px] max-h-[320px] min-w-[55%] max-w[55%] object-cover rounded"
         src={props.article.photo}

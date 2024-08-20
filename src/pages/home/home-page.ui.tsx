@@ -9,9 +9,16 @@ import {
 import { ArticleList, RecomendationArticlesList } from '~widgets/article-list'
 import { Intro } from '~widgets/intro'
 import { useTranslation } from 'react-i18next'
+import { articleQueries } from '~entities/article'
 
 export const HomePage = () => {
   const { t } = useTranslation()
+  const {
+    data: articleData,
+    isLoading,
+    isError,
+    isSuccess,
+  } = articleQueries.useGetArticles()
 
   return (
     <>

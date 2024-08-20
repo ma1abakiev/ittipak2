@@ -106,5 +106,44 @@
     "error": "سوئال يوللاش مەسىلىسىدىكى خاتالىق",
     "haveAccount": "ئاكاۋت بارمۇ؟",
     "login": "كېرىڭ"
-  }
+  },
+  "title_placeholder": "ماقالە تېمىسى",
+  "step_create_article": "ماقالە قۇرۇش",
+  "step_publish_article": "ماقالە نەشىرى",
+  "button_next": "كېيىنكى",
+  "publish_heading": "نەشىر",
+  "select_language": "ماقالە يېزىلغان تىلنى تاللاڭ",
+  "upload_cover": "ماقالەنى قاپاق بىلەن يۈكلەڭ",
+  "button_back": "ئارقا",
+  "sending_data": "سانلىق مەلۇمات ئەۋەتىۋاتىدۇ...",
+  "button_finish": "تاماملاشتۇرۇش",
+  "language_ru": "رۇسچە",
+  "language_en": "ئىنگىلىزچە",
+  "language_ug": "ئۇيغۇرچە",
+
+  "heading_1": "تېما 1",
+  "heading_2": "تېما 2",
+  "heading_3": "تېما 3",
+  "numbered_list": "نومۇرلىق تىزىملىك",
+  "bullet_list": "بەلگە تىزىملىكى",
+  "paragraph": "ئەۋزۇ",
+  "table": "جەدۋەل",
+  "image": "رەسىم",
+  "video": "سىن",
+  "audio": "ئەھەڭ",
+  "check_list": "تىزىملىك",
+  "file": "ھۆججەت",
+
+  "cancel": "ئەمەلدىن قالدۇرۇش",
+  "save": "ساقلاش",
+  "cover_display_large": "چوشۇۋالغۇنىڭ چوڭ ئېكراندىكى كۆرۈنۈشى",
+  "cover_display_small": "چوشۇۋالغۇنىڭ كىچىك ئېكراندىكى كۆرۈنۈشى",
+  "select_another_photo": "يەنە بىر رەسىمنى تاللاڭ",
+  "drop_files_here": "ھۆججەتلەرنى بۇ يەرگە تارتىڭ",
+  "select_or_drag_file": "ھۆججەت تاللاڭ ياكى تارتىڭ",
+
+  "read_btn": "تېخىمۇ كۆپ ئوقۇڭ",
+  "read_time": "ئوقۇش ۋاقتى",
+  "minute": "مىن"
+
 }

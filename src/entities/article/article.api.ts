@@ -1,11 +1,12 @@
 import $api from '~shared/lib/api';
 import { ArticlesList, Article, CreateArticleDto } from './article.types';
 import axios from 'axios';
+import { getCookie } from 'typescript-cookie';
 
 const API_URL = 'http://ittipak.api.ustaz.online/';
 
 function getCurrentLanguage() {
-  return localStorage.getItem('language') || 'ru'; // Язык по умолчанию — 'ru'
+  return getCookie('language') || 'ru'; // Язык по умолчанию — 'ru'
 }
 
 export function getArticleQuery() {
