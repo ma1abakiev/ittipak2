@@ -42,7 +42,7 @@ export default {
       black: '#020617',
     },
     backgroundImage: {
-      'intro-img': "url('./public/mucams.jpeg')",
+      'intro-img': "url('./public/mucams2.jpeg')",
       ittipak: "url('./public/ittipak_page-0001.jpg')",
     },
   },

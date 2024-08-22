@@ -120,7 +120,7 @@
   "button_finish": "Завершить",
   "language_ru": "Русский",
   "language_en": "Английский",
-  "language_ug": "Уйгурский", 
+  "language_ug": "Уйгурский",
 
   "heading_1": "Заголовок 1",
   "heading_2": "Заголовок 2",
@@ -133,7 +133,7 @@
   "video": "Видео",
   "audio": "Аудио",
   "check_list": "Список",
-  "file": "Файл", 
+  "file": "Файл",
 
   "cancel": "Отменить",
   "save": "Сохранить",
@@ -145,7 +145,11 @@
 
   "read_btn": "Читать дальше",
   "read_time": "Время чтения",
-  "minute": "min"
+  "minute": "мин",
 
-
+  "archive_btn": "Архивировать статью",
+  "edit_btn": "Редактировать",
+  "draft_status":"Черновик",
+  "published_status": "Публиковано",
+  "archived_status": "Архивировано"
 }

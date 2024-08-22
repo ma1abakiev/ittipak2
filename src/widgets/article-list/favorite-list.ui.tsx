@@ -17,6 +17,7 @@ import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled'
 import { EditButton } from '~features/article/edit-button'
 import { userQueries } from '~entities/user'
 import { useTranslation } from 'react-i18next'
+import { AccessTimeFilled, Visibility } from '@mui/icons-material'
 
 dayjs.locale('ru')
 
@@ -77,23 +78,21 @@ function ArticleCard(props: ArticleCardProps) {
         <CardContent className="p-[12px] ">
           <div className="flex justify-between items-center pb-3">
             <div className="flex  items-center gap-3">
-              <div className="flex items-center gap-3">
-                <p className="text-md text-pc-400 text-sm ">
-                  {dayjs(props.article.created)
-                    .format('MMMM D, YYYY')
-                    .toUpperCase()}
+            <div className="flex items-center gap-3 mt-3 mx-3">
+              <p className="text-md text-pc-400 text-sm ">
+                {dayjs(props.article.created).format('DD.MM.YYYY').toUpperCase()}
+              </p>
+              <p className="text-md text-pc-400 flex items-center gap-1 text-sm">
+                <Visibility className="w-5" />
+                {props.article.viewCount}
+              </p>
+              <Tooltip title={t('read_time')}>
+                <p className="text-md text-pc-400  flex items-center gap-1 text-sm">
+                  <AccessTimeFilled className="w-4" />
+                  {props.article.readTime} {t('minute')}
                 </p>
-                <p className="text-md text-pc-400 flex items-center gap-1 text-sm">
-                  <VisibilityIcon className="w-5" />
-                  {props.article.viewCount}
-                </p>
-                <Tooltip title={t('commentary.title')}>
-                  <p className="text-md text-pc-400  flex items-center gap-1 text-sm">
-                    <AccessTimeFilledIcon className="w-4" />
-                    {props.article.readTime} {t('commentary.title')}
-                  </p>
-                </Tooltip>
-              </div>
+              </Tooltip>
+            </div>
             </div>
           </div>
           <div>

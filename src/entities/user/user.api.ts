@@ -22,3 +22,6 @@ export function registerUserMutation(params: { user: CreateUserSchema }) {
 export function emailActivationMutation(params: { data: ActivationData }) {
   return $api.post('api/users/activation/', params.data)
 }
+export function editUserProfile(params: { user: EditUserProfile }) {
+  return $api.patch('api/users/me/', params.user);
+}

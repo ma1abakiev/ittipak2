@@ -1,4 +1,5 @@
 import {
+  editUserProfile,
   emailActivationMutation,
   getTokenMutation,
   loginUserQuery,
@@ -8,6 +9,7 @@ import {
   useMutation,
   useQuery,
   queryOptions as tsqQueryOptions,
+  useQueryClient,
 } from '@tanstack/react-query'
 import { pathKeys } from '~shared/lib/react-router'
 import { useNavigate } from 'react-router-dom'
@@ -133,4 +135,26 @@ export function useActivationMutation() {
       }
     },
   })
+}
+
+export function useEditUserProfile() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: keys.root(),
+    mutationFn: editUserProfile,
+    onSuccess: async () => {
+      await toast.success('Ваш профиль успешно изменен!');
+      await queryClient.invalidateQueries({ queryKey: keys.root() });
+    },
+    onError: (error: AxiosErrorType) => {
+      if (error.response && error.response.data) {
+        const errors = error.response.data;
+        Object.keys(errors).forEach((field) => {
+          toast.error(`${field}: ${errors[field][0]}`);
+        });
+      } else {
+        toast.error('Ошибка при выполнении запроса');
+      }
+    },
+  });
 }

@@ -3,7 +3,7 @@ import {
   useQuery,
   useQueryClient,
   queryOptions as tsqQueryOptions,
-} from '@tanstack/react-query';
+} from '@tanstack/react-query'
 import {
   archivedArticle,
   createArticleMutation,
@@ -12,27 +12,28 @@ import {
   getArticleDetailsQuery,
   getArticleQuery,
   getFavoriteArticles,
+  getWriterArticles,
   likeArticleQuery,
-} from './article.api';
-import { toast } from 'react-toastify';
-import { queryClient } from './../../shared/lib/react-query/react-query.lib';
-import { Article } from './article.types';
-import { AxiosResponse } from 'axios';
-import { useNavigate } from 'react-router-dom';
+} from './article.api'
+import { toast } from 'react-toastify'
+import { queryClient } from './../../shared/lib/react-query/react-query.lib'
+import { Article } from './article.types'
+import { AxiosResponse } from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 type AxiosErrorType = {
-  code: string;
-  config: any;
-  message: string;
-  name: string;
-  request: any;
+  code: string
+  config: any
+  message: string
+  name: string
+  request: any
   response?: {
-    data: any;
-    status: number;
-    headers: any;
-    config: any;
-  };
-};
+    data: any
+    status: number
+    headers: any
+    config: any
+  }
+}
 
 const keys = {
   root: () => ['article'],
@@ -45,7 +46,7 @@ const keys = {
   viewArticle: (id: number) => [...keys.root(), 'view', id] as const,
   favArticle: (id: number) => [...keys.root(), 'favorite', id] as const,
   likeArticle: (id: number) => [...keys.root(), 'like', id] as const,
-};
+}
 
 export const articleService = {
   queryKey: (id: number) => keys.article(id),
@@ -60,17 +61,17 @@ export const articleService = {
     ),
 
   queryOptions: (id: number) => {
-    const articleKey = articleService.queryKey(id);
+    const articleKey = articleService.queryKey(id)
     return tsqQueryOptions({
       queryKey: articleKey,
       queryFn: async () => {
-        const article = await getArticleDetailsQuery(id);
-        articleService.setCache(article);
-        return article;
+        const article = await getArticleDetailsQuery(id)
+        articleService.setCache(article)
+        return article
       },
       initialDataUpdatedAt: () =>
         queryClient.getQueryState(articleKey)?.dataUpdatedAt,
-    });
+    })
   },
 
   prefetchQuery: async (id: number) =>
@@ -78,79 +79,83 @@ export const articleService = {
 
   ensureQueryData: async (id: number) =>
     queryClient.ensureQueryData(articleService.queryOptions(id)),
-};
+}
 
 export function useGetArticles() {
   return useQuery({
     queryKey: keys.root(),
     queryFn: getArticleQuery,
-  });
+  })
+}
+export function useGetWriterArticle() {
+  return useQuery({
+    queryKey: keys.getWriterArticle(),
+    queryFn: getWriterArticles,
+  })
 }
 
 export function useGetFavoriteArticles() {
   return useQuery({
     queryKey: keys.getFavArticle(),
     queryFn: getFavoriteArticles,
-  });
+  })
 }
 
 export function useGetArticleDetail(id: number) {
   return useQuery({
     queryKey: keys.article(id),
     queryFn: () => getArticleDetailsQuery(id),
-  });
+  })
 }
 
-
-
 export function useLikeArticle(id: number) {
-  const queryClient = useQueryClient();
-  const key = keys.article(id);
+  const queryClient = useQueryClient()
+  const key = keys.article(id)
 
   return useMutation({
     mutationKey: keys.likeArticle(id),
     mutationFn: () => likeArticleQuery(id),
     onMutate: async () => {
-      await queryClient.cancelQueries({ queryKey: keys.root() });
-      await queryClient.cancelQueries({ queryKey: key });
+      await queryClient.cancelQueries({ queryKey: keys.root() })
+      await queryClient.cancelQueries({ queryKey: key })
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: keys.root() });
-      await queryClient.invalidateQueries({ queryKey: ['user'] });
-      await queryClient.invalidateQueries({ queryKey: key });
+      await queryClient.invalidateQueries({ queryKey: keys.root() })
+      await queryClient.invalidateQueries({ queryKey: ['user'] })
+      await queryClient.invalidateQueries({ queryKey: key })
     },
-  });
+  })
 }
 
 export function useFavoriteArticle(id: number) {
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   return useMutation({
     mutationKey: keys.favArticle(id),
     mutationFn: () => favoriteArticleQuery(id),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: keys.favArticle(id) });
-      await queryClient.invalidateQueries({ queryKey: keys.root() });
+      await queryClient.invalidateQueries({ queryKey: keys.favArticle(id) })
+      await queryClient.invalidateQueries({ queryKey: keys.root() })
     },
-  });
+  })
 }
 
 export function useArchivedArticleQuery(id: number) {
-  const queryClient = useQueryClient();
-  const key = keys.article(id);
+  const queryClient = useQueryClient()
+  const key = keys.article(id)
   return useMutation({
     mutationKey: keys.deleteArticle(id),
     mutationFn: () => archivedArticle(id),
     onMutate: async () => {
-      await queryClient.cancelQueries({ queryKey: key });
-      await queryClient.cancelQueries({ queryKey: keys.root() });
+      await queryClient.cancelQueries({ queryKey: key })
+      await queryClient.cancelQueries({ queryKey: keys.root() })
     },
     onSuccess: () => {
-      toast.info('Статья успешно архивировано!');
+      toast.info('Статья успешно архивировано!')
     },
     onSettled: async () => {
-      await queryClient.invalidateQueries({ queryKey: keys.root() });
+      await queryClient.invalidateQueries({ queryKey: keys.root() })
     },
-  });
+  })
 }
 
 export function useCreateArticleMutation() {
@@ -158,42 +163,42 @@ export function useCreateArticleMutation() {
     mutationKey: keys.root(),
     mutationFn: createArticleMutation,
     onSuccess: (response) => {
-      const article = response.data;
-      toast.success('Статья успешна отправлена на модерацию');
-      localStorage.removeItem('savedImage');
-      localStorage.removeItem('sandboxContent');
-      articleService.setCache(article);
+      const article = response.data
+      toast.success('Статья успешна отправлена на модерацию')
+      localStorage.removeItem('savedImage')
+      localStorage.removeItem('sandboxContent')
+      articleService.setCache(article)
     },
     onError: (error: AxiosErrorType) => {
       if (error.response && error.response.data) {
-        const errors = error.response.data;
+        const errors = error.response.data
         Object.keys(errors).forEach((field) => {
-          toast.error(`${field}: ${errors[field]}`);
-        });
+          toast.error(`${field}: ${errors[field]}`)
+        })
       }
     },
-  });
+  })
 }
 
 export function useUpdateArticle(id) {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return useMutation({
     mutationKey: keys.updateArticle(),
     mutationFn: editArticle,
     onSuccess: async () => {
-      toast.success('Статья успешна отправлена на модерацию');
+      toast.success('Статья успешна отправлена на модерацию')
       // localStorage.removeItem(`editContent-${id}`);
-      navigate('/profile');
+      navigate('/profile')
     },
     onError: (error: AxiosErrorType) => {
       if (error.response && error.response.data) {
-        const errors = error.response.data;
+        const errors = error.response.data
         Object.keys(errors).forEach((field) => {
-          toast.error(`${field}: ${errors[field]}`);
-        });
+          toast.error(`${field}: ${errors[field]}`)
+        })
       } else {
-        toast.error('Ошибка при выполнении запроса');
+        toast.error('Ошибка при выполнении запроса')
       }
     },
-  });
+  })
 }

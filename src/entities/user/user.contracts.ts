@@ -41,3 +41,9 @@ export const UserDtoSchema = z.object({
   userPermissions: z.array(z.number()),
   favoriteArticles: z.array(z.number()),
 })
+export const editUserSchema = z.object({
+  email: z.string().email(),
+  firstName: z.string(),
+  lastName: z.string(),
+  photo: z.instanceof(File).optional(),
+})

@@ -143,5 +143,11 @@
 
   "read_btn": "Read more",
   "read_time": "reading time",
-  "minute": "мин"
+  "minute": "min",
+
+  "archive_btn": "Archive article",
+  "edit_btn": "Edit",
+  "draft_status": "Draft",
+  "published_status": "Published",
+  "archived_status": "Archived"
 }

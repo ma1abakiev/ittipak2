@@ -144,6 +144,10 @@
 
   "read_btn": "تېخىمۇ كۆپ ئوقۇڭ",
   "read_time": "ئوقۇش ۋاقتى",
-  "minute": "مىن"
-
+  "minute": "مىن",
+  "archive_btn": "ئارخىپ ماقالىسى",
+  "edit_btn": "تەھرىر",
+  "draft_status": "لايىھە",
+  "published_status": "ئېلان قىلىندى",
+  "archived_status": "ئارخىپلاشتۇرۇلغان"
 }
