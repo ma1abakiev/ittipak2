@@ -1,11 +1,13 @@
 import { userQueries } from '~entities/user'
 import EditIcon from '@mui/icons-material/Edit'
 import { useNavigate } from 'react-router-dom'
-import { IconButton } from '@mui/material'
+import { IconButton, Tooltip } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
 export const EditButton = ({ id }) => {
   const { data: userData, isLoading, isError } = userQueries.useLoginUserQuery()
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -22,9 +24,11 @@ export const EditButton = ({ id }) => {
   const { role } = userData.data
   if (role == 'writer') {
     return (
-      <IconButton onClick={handlePath}>
-        <EditIcon />
-      </IconButton>
+      <Tooltip title={t('edit_btn')}>
+        <IconButton onClick={handlePath}>
+          <EditIcon />
+        </IconButton>
+      </Tooltip>
     )
   }
 

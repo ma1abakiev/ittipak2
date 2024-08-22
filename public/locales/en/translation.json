@@ -149,5 +149,17 @@
   "edit_btn": "Edit",
   "draft_status": "Draft",
   "published_status": "Published",
-  "archived_status": "Archived"
+  "archived_status": "Archived",
+
+  "error_fetching_data": "Error fetching user data.",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "email": "Email",
+  "select_profile_photo": "Select Profile Photo",
+  "file_selected": "File selected:",
+  "edit": "Edit",
+  "required_field": "Required field",
+  "invalid_email_format": "Invalid email format",
+  "set_profile_photo": "Set Profile Photo",
+  "author": "Author"
 }

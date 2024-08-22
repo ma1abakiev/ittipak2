@@ -1,26 +1,22 @@
 import {
-  Card,
   CardContent,
   CardMedia,
   Tooltip,
   CircularProgress,
-  IconButton,
   Paper,
 } from '@mui/material'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ru'
-import { useNavigate } from 'react-router-dom'
 import { articleQueries, articleTypes } from '~entities/article'
 import { ShareButton } from '~features/article/share-button'
 import { LikeButton } from '~features/article/like-button'
 import { FavoriteButton } from '~features/article/favorite-button'
 import { StatusMenu } from '~features/article/status-menu'
 import { ArchiveButton } from '~features/article/archive-button'
-
-import EditIcon from '@mui/icons-material/Edit'
 import { AccessTimeFilled, Visibility } from '@mui/icons-material'
 import { useTranslation } from 'react-i18next'
 import { getCookie } from 'typescript-cookie'
+import { EditButton } from '~features/article/edit-button'
 
 const savedLanguage = getCookie('language')
 
@@ -63,15 +59,11 @@ type ArticleCardProps = { article: articleTypes.Article }
 
 function ArticleCard(props: ArticleCardProps) {
   const { t } = useTranslation()
-  const navigate = useNavigate()
-  const handleEdit = () => {
-    navigate(`/article/edit/${props.article.id}/`)
-  }
 
   return (
-    <Paper className="min-w-full max-w-full shadow-sm p-2 card">
-      <div className="flex flex-col-reverse md:flex-row items-center md:justify-between">
-        <CardContent className="md:p-[12px] p-2">
+    <Paper className="min-w-full max-w-full shadow-sm p-2 md-max:p-5 card">
+      <div className="flex  flex-row md-max:flex-col-reverse items-center  justify-between">
+        <CardContent className="md:p-[12px] p-2 self-start	">
           <div className="flex justify-between items-center pb-3">
             <div className="flex flex-col md:flex-row md:items-center gap-3">
               <div className="flex items-center gap-4 cursor-pointer">
@@ -110,18 +102,17 @@ function ArticleCard(props: ArticleCardProps) {
               />
               <FavoriteButton id={props.article.id} />
               <ShareButton id={props.article.id} />
-              <ArchiveButton id={props.article.id} />
-              <Tooltip title={t('edit_btn')}>
-                <IconButton onClick={handleEdit}>
-                  <EditIcon />
-                </IconButton>
-              </Tooltip>
+              <ArchiveButton
+                id={props.article.id}
+                status={props.article.status}
+              />
+              <EditButton id={props.article.id}></EditButton>
             </div>
           </div>
         </CardContent>
         <CardMedia
           component="img"
-          className="w-[95%] md:max-w-[250px] min-h-[130px] max-h-[130px] rounded md:mr-[12px] cursor-pointer"
+          className="md-max:min-w-[100%] max-w-[250px] min-h-[130px] max-h-[130px] md-max:max-h-[250px] md-max:min-h-full rounded mr-[12px] md-max:mr-0 cursor-pointer"
           image={props.article.photo}
           alt={props.article.title}
           title={props.article.title}

@@ -68,11 +68,16 @@ export function favoriteArticleQuery(id: number) {
   })
 }
 
-export function archivedArticle(id: number) {
+export function archivedArticle(
+  id: number,
+  currentStatus: 'archived' | 'published'
+) {
   const lang = getCurrentLanguage()
+  const newStatus = currentStatus === 'archived' ? 'published' : 'archived'
+
   return $api.patch(
     `api/articles/admin/${id}/`,
-    { status: 'archived' },
+    { status: newStatus },
     {
       headers: { 'Accept-Language': lang },
     }

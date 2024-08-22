@@ -149,5 +149,17 @@
   "edit_btn": "تەھرىر",
   "draft_status": "لايىھە",
   "published_status": "ئېلان قىلىندى",
-  "archived_status": "ئارخىپلاشتۇرۇلغان"
+  "archived_status": "ئارخىپلاشتۇرۇلغان",
+
+  "error_fetching_data": "ئىشلەتكۈچىنىڭ ئۇچۇرىنى يۈكلەش مەغلۇپ بولدى.",
+  "first_name": "ئىسىم",
+  "last_name": "فامىلىيە",
+  "email": "ئېلخەت",
+  "select_profile_photo": "پروفىل فوتوسىنى تاللاڭ",
+  "file_selected": "ھۆججەت تاللاندى:",
+  "edit": "تەھرىرلەش",
+  "required_field": "مېجبۇرىي قۇتۇ",
+  "invalid_email_format": "ناتوغرا Email فورماتى",
+  "set_profile_photo": "پروفىل فوتوسىنى قايتىدىن سېتىڭ",
+  "author": "يېزىقچى"
 }

@@ -151,5 +151,17 @@
   "edit_btn": "Редактировать",
   "draft_status":"Черновик",
   "published_status": "Публиковано",
-  "archived_status": "Архивировано"
+  "archived_status": "Архивировано",
+
+  "error_fetching_data": "Ошибка при загрузке данных пользователя.",
+  "first_name": "Имя",
+  "last_name": "Фамилия",
+  "email": "Email",
+  "select_profile_photo": "Выберите фото профиля",
+  "file_selected": "Файл выбран:",
+  "edit": "Редактировать",
+  "required_field": "Обязательное поле",
+  "invalid_email_format": "Неправильный формат email",
+  "set_profile_photo": "Установить фото профиля",
+  "author": "Автор"
 }

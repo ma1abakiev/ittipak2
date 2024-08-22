@@ -1,5 +1,3 @@
-
-
 import {
   Avatar,
   Button,
@@ -12,6 +10,7 @@ import { useState } from 'react'
 import { userQueries, userTypes } from '~entities/user'
 import { ModalPopup } from '~widgets/modal-popup'
 import EditIcon from '@mui/icons-material/Edit'
+import { useTranslation } from 'react-i18next'
 
 import {
   ErrorMessage,
@@ -23,6 +22,7 @@ import {
 } from 'formik'
 
 export function ProfileCard() {
+  const { t } = useTranslation()
   const [active, setActive] = useState(false)
   const [selectedFile, setSelectedFile] = useState(null)
   const [preview, setPreview] = useState(null)
@@ -33,11 +33,11 @@ export function ProfileCard() {
   const { mutate: editUser, isPending } = userQueries.useEditUserProfile()
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <div>{t('loading')}</div>
   }
 
   if (isError) {
-    return <div>Error fetching user data.</div>
+    return <div>{t('error_fetching_data')}</div>
   }
 
   const { email, firstName, lastName, username, photo } = userData.data
@@ -68,7 +68,7 @@ export function ProfileCard() {
     <>
       <Paper
         elevation={10}
-        className="max-w-[650px] md:w-[650px] bg-[white]  rounded h-[380px] shadow-md"
+        className="md-max:w-[350px] w-[650px] bg-[white]  rounded h-[380px] shadow-md"
       >
         <div>
           <img
@@ -76,7 +76,7 @@ export function ProfileCard() {
             alt=""
             className="w-full max-h-[140px] object-cover rounded"
           />
-          <Tooltip title="Установить фото профиля">
+          <Tooltip title={t('set_profile_photo')}>
             <Button
               className="rounded-full mx-auto flex justify-center relative top-[-60px]"
               onClick={() => setActive(true)}
@@ -91,8 +91,10 @@ export function ProfileCard() {
         </div>
         <div className="flex flex-col items-center gap-2 relative top-[-50px]">
           <h2 className="text-xl font-bold text-primary-800">{`${firstName} ${lastName}`}</h2>
-          <p className=" text-pc-500">@{username}, Автор</p>
-          <p className=" text-pc-500">{email}</p>
+          <p>
+            @{username}, {t('author')}
+          </p>
+          <p>{email}</p>
           <Button
             size="small"
             variant="contained"
@@ -100,7 +102,7 @@ export function ProfileCard() {
             startIcon={<EditIcon />}
             onClick={() => setActive(true)}
           >
-            Редактировать
+            {t('edit')}
           </Button>
         </div>
       </Paper>
@@ -128,7 +130,7 @@ export function ProfileCard() {
                     fullWidth
                     id="email"
                     name="email"
-                    label="Email"
+                    label={t('email')}
                     size="small"
                   />
                   <ErrorMessage
@@ -143,7 +145,7 @@ export function ProfileCard() {
                     fullWidth
                     id="firstName"
                     name="firstName"
-                    label="Имя"
+                    label={t('first_name')}
                     size="small"
                   />
                   <ErrorMessage
@@ -159,7 +161,7 @@ export function ProfileCard() {
                     id="lastName"
                     name="lastName"
                     size="small"
-                    label="Фамилия"
+                    label={t('last_name')}
                   />
                   <ErrorMessage
                     name="lastName"
@@ -185,12 +187,12 @@ export function ProfileCard() {
                       component="span"
                       className="shadow-none bg-pc-500"
                     >
-                      Выберите фото профиля
+                      {t('select_profile_photo')}
                     </Button>
                   </label>
                   {fileSelected && (
                     <p className="mt-2 text-xs">
-                      Файл выбран: {selectedFile.name}
+                      {t('file_selected')} {selectedFile.name}
                     </p>
                   )}
                   <ErrorMessage
@@ -217,6 +219,8 @@ export function ProfileCard() {
 
 function SubmitButton() {
   const { isValidating, isValid } = useFormikContext()
+  const { t } = useTranslation()
+
   return (
     <Button
       variant="contained"
@@ -224,26 +228,27 @@ function SubmitButton() {
       className="w-full mb-2 bg-second-100 shadow-none"
       disabled={!isValid || isValidating}
     >
-      Редактировать
+      {t('edit')}
     </Button>
   )
 }
 
 const validateForm = (values) => {
+  const { t } = useTranslation()
   const errors: Partial<FormikValues> = {}
 
   if (!values.email) {
-    errors.email = 'Обязательное поле'
+    errors.email = t('required_field')
   } else if (!/^\S+@\S+\.\S+$/.test(values.email)) {
-    errors.email = 'Неправильный формат email'
+    errors.email = t('invalid_email_format')
   }
 
   if (!values.firstName) {
-    errors.firstName = 'Обязательное поле'
+    errors.firstName = t('required_field')
   }
 
   if (!values.lastName) {
-    errors.lastName = 'Обязательное поле'
+    errors.lastName = t('required_field')
   }
 
   return errors

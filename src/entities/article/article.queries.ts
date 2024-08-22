@@ -139,19 +139,24 @@ export function useFavoriteArticle(id: number) {
   })
 }
 
-export function useArchivedArticleQuery(id: number) {
+export function useArchivedArticleQuery(
+  id: number,
+  status: 'archived' | 'published'
+) {
   const queryClient = useQueryClient()
   const key = keys.article(id)
   return useMutation({
     mutationKey: keys.deleteArticle(id),
-    mutationFn: () => archivedArticle(id),
+    mutationFn: () => archivedArticle(id, status),
     onMutate: async () => {
       await queryClient.cancelQueries({ queryKey: key })
       await queryClient.cancelQueries({ queryKey: keys.root() })
     },
     onSuccess: () => {
-      toast.info('Статья успешно архивировано!')
+      const action = status === 'archived' ? 'разархивирована' : 'архивирована'
+      toast.info(`Статья успешно ${action}!`)
     },
+
     onSettled: async () => {
       await queryClient.invalidateQueries({ queryKey: keys.root() })
     },

@@ -7,8 +7,11 @@ interface IDeleteButton {
   id: number
 }
 
-export function ArchiveButton({ id }: IDeleteButton) {
-  const { mutate: archivedArticle } = articleQueries.useArchivedArticleQuery(id)
+export function ArchiveButton({ id, status }: IDeleteButton) {
+  const { mutate: archivedArticle } = articleQueries.useArchivedArticleQuery(
+    id,
+    status
+  )
 
   const handleArchived = async () => {
     await archivedArticle()
