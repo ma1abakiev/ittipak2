@@ -17,6 +17,8 @@ import { AccessTimeFilled, Visibility } from '@mui/icons-material'
 import { useTranslation } from 'react-i18next'
 import { getCookie } from 'typescript-cookie'
 import { EditButton } from '~features/article/edit-button'
+import { useState } from 'react'
+import { Search } from '~features/search'
 
 const savedLanguage = getCookie('language')
 
@@ -29,6 +31,7 @@ export function WriterArticlesList() {
     isSuccess,
     isError,
   } = articleQueries.useGetWriterArticle()
+  const [filteredArticles, setFilteredArticles] = useState([])
 
   if (isLoading) {
     return (
@@ -47,10 +50,15 @@ export function WriterArticlesList() {
 
   return (
     <div className="flex flex-col mx-auto gap-5 w-full">
+      <Search
+        articles={articles}
+        onSearch={setFilteredArticles}
+      />
       {isSuccess &&
-        articles.map((article) => (
-          <ArticleCard article={article} key={article.id} />
-        ))}
+        (filteredArticles.length > 0
+          ? filteredArticles
+          : articles
+        ).map((article) => <ArticleCard article={article} key={article.id} />)}
     </div>
   )
 }

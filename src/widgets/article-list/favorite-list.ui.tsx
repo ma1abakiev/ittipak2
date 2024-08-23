@@ -12,12 +12,12 @@ import { pathKeys } from '~shared/lib/react-router'
 import { articleQueries, articleTypes } from '~entities/article'
 import { LikeButton } from '~features/article/like-button'
 import { FavoriteButton } from '~features/article/favorite-button'
-import VisibilityIcon from '@mui/icons-material/Visibility'
-import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled'
 import { EditButton } from '~features/article/edit-button'
 import { userQueries } from '~entities/user'
 import { useTranslation } from 'react-i18next'
 import { AccessTimeFilled, Visibility } from '@mui/icons-material'
+import { useState } from 'react'
+import { Search } from '~features/search'
 
 dayjs.locale('ru')
 
@@ -29,6 +29,8 @@ export function FavoriteArticlesList() {
     isSuccess,
     isError,
   } = articleQueries.useGetFavoriteArticles()
+  const [filteredArticles, setFilteredArticles] = useState([])
+
 
   if (isLoading) {
     return (
@@ -55,8 +57,9 @@ export function FavoriteArticlesList() {
 
   return (
     <div className="flex flex-col mx-auto gap-5 max-w-[90%]">
+      <Search articles={articles} onSearch={setFilteredArticles} />
       {isSuccess &&
-        articles.map((article) => (
+        (filteredArticles.length > 0 ? filteredArticles : articles).map((article) => (
           <ArticleCard article={article} key={article.id} />
         ))}
     </div>

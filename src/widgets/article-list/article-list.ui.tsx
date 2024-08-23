@@ -21,6 +21,8 @@ import { userQueries } from '~entities/user'
 import dayjs from 'dayjs'
 import { Visibility, AccessTimeFilled } from '@mui/icons-material/'
 import { useTranslation } from 'react-i18next'
+import { Search } from '~features/search'
+import { useState } from 'react'
 
 export const ArticleList = () => {
   const { t } = useTranslation()
@@ -30,6 +32,8 @@ export const ArticleList = () => {
     isError,
     isSuccess,
   } = articleQueries.useGetArticles()
+
+  const [filteredArticles, setFilteredArticles] = useState([])
 
   if (isLoading) {
     return (
@@ -47,8 +51,9 @@ export const ArticleList = () => {
     return (
       <section className="mt-20">
         <h2 className="text-center text-4xl">{t('feed')}</h2>
+        <Search articles={articleData.data.results} onSearch={setFilteredArticles} />
         <Box className="flex flex-col gap-y-10 mt-10">
-          {articleData.data.results.map((article) => {
+          {(filteredArticles.length > 0 ? filteredArticles : articleData.data.results).map((article) => {
             return <ArticleCard key={article.id} {...article} />
           })}
         </Box>

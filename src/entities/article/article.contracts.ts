@@ -15,6 +15,9 @@ export const ArticleSchema = z.object({
   updated: z.string(),
   created: z.string(),
   likes: z.array(z.number()),
+  author: z.object({
+    username: z.string(),
+  }),
 })
 export const ArticlesList = z.object({
   results: z.array(ArticleSchema),
