@@ -6,7 +6,7 @@ import { getCookie } from 'typescript-cookie'
 const API_URL = 'http://api.ittipak.makalabox.com/'
 
 function getCurrentLanguage() {
-  return getCookie('language') || 'ru' // Язык по умолчанию — 'ru' ааа
+  return getCookie('language') || 'ru' // Язык по умолчанию — 'ru'
 }
 
 export function getArticleQuery() {
