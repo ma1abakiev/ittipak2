@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { IconButton, InputBase, Paper } from '@mui/material'
 import { Search as SearchIcon } from '@mui/icons-material'
+import { useTranslation } from 'react-i18next'
 
 export const Search = ({ articles, onSearch }) => {
   const [searchValue, setSearchValue] = useState('')
+  const {t} = useTranslation()
 
   const handleSearch = (event) => {
     const value = event.target.value
@@ -26,8 +28,7 @@ export const Search = ({ articles, onSearch }) => {
     >
       <InputBase
         sx={{ ml: 1, flex: 1 }}
-        placeholder="Search Article"
-        inputProps={{ 'aria-label': 'search google maps' }}
+        placeholder={t('search_article')}
         value={searchValue}
         onChange={handleSearch}
       />

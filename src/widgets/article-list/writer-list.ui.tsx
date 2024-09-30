@@ -4,6 +4,7 @@ import {
   Tooltip,
   CircularProgress,
   Paper,
+  Button,
 } from '@mui/material'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ru'
@@ -19,6 +20,8 @@ import { getCookie } from 'typescript-cookie'
 import { EditButton } from '~features/article/edit-button'
 import { useState } from 'react'
 import { Search } from '~features/search'
+import { Link } from 'react-router-dom'
+import { pathKeys } from '~shared/lib/react-router'
 
 const savedLanguage = getCookie('language')
 
@@ -50,15 +53,11 @@ export function WriterArticlesList() {
 
   return (
     <div className="flex flex-col mx-auto gap-5 w-full">
-      <Search
-        articles={articles}
-        onSearch={setFilteredArticles}
-      />
+      <Search articles={articles} onSearch={setFilteredArticles} />
       {isSuccess &&
-        (filteredArticles.length > 0
-          ? filteredArticles
-          : articles
-        ).map((article) => <ArticleCard article={article} key={article.id} />)}
+        (filteredArticles.length > 0 ? filteredArticles : articles).map(
+          (article) => <ArticleCard article={article} key={article.id} />
+        )}
     </div>
   )
 }
@@ -97,9 +96,11 @@ function ArticleCard(props: ArticleCardProps) {
             </div>
           </div>
           <div>
-            <h4 className="font-bold text-xl title duration-300">
-              {props.article.title}
-            </h4>
+            <Link to={pathKeys.article.byId({ id: props.article.id })}>
+              <h4 className="font-bold text-xl title duration-300">
+                {props.article.title}
+              </h4>
+            </Link>
             <div className="pt-2 flex items-center gap-1">
               <LikeButton
                 like={{
@@ -120,7 +121,7 @@ function ArticleCard(props: ArticleCardProps) {
         </CardContent>
         <CardMedia
           component="img"
-          className="md-max:min-w-[100%] max-w-[250px] min-h-[130px] max-h-[130px] md-max:max-h-[250px] md-max:min-h-full rounded mr-[12px] md-max:mr-0 cursor-pointer"
+          className="md-max:min-w-[95%] max-w-[250px] min-h-[130px] max-h-[130px] md-max:max-h-[250px] md-max:min-h-full rounded mr-[12px] md-max:mr-0 cursor-pointer"
           image={props.article.photo}
           alt={props.article.title}
           title={props.article.title}

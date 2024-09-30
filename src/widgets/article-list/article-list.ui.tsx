@@ -32,6 +32,8 @@ export const ArticleList = () => {
     isError,
     isSuccess,
   } = articleQueries.useGetArticles()
+  console.log(articleData);
+  
 
   const [filteredArticles, setFilteredArticles] = useState([])
 

@@ -3,7 +3,7 @@ import { ArticlesList, Article, CreateArticleDto } from './article.types'
 import axios from 'axios'
 import { getCookie } from 'typescript-cookie'
 
-const API_URL = 'http://ittipak.api.ustaz.online/'
+const API_URL = 'http://api.ittipak.makalabox.com/'
 
 function getCurrentLanguage() {
   return getCookie('language') || 'ru' // Язык по умолчанию — 'ru'

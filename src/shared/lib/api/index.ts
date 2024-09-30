@@ -1,38 +1,38 @@
-import axios, { AxiosRequestConfig, AxiosError } from 'axios';
-import { getCookie, setCookie } from 'typescript-cookie';
+import axios, { AxiosRequestConfig, AxiosError } from 'axios'
+import { getCookie, setCookie } from 'typescript-cookie'
 
-export const API_URL = 'http://ittipak.api.ustaz.online/'
+export const API_URL = 'http://api.ittipak.makalabox.com/'
 
 const $api = axios.create({
   withCredentials: true,
   baseURL: API_URL,
-});
+})
 
-const getAccessToken = () => getCookie('access') || null;
+const getAccessToken = () => getCookie('access') || null
 
 $api.interceptors.request.use(async (config: AxiosRequestConfig) => {
-  const accessToken = getAccessToken();
+  const accessToken = getAccessToken()
 
   if (accessToken) {
-    config.headers.Authorization = `Bearer ${accessToken}`;
+    config.headers.Authorization = `Bearer ${accessToken}`
   }
-  return config;
-});
+  return config
+})
 
 $api.interceptors.response.use(
   (response) => {
-    return response;
+    return response
   },
   async (error: AxiosError) => {
-    const originalRequest = error.config;
+    const originalRequest = error.config
     if (
       error.response &&
       error.response.status === 401 &&
       !originalRequest._isRetry
     ) {
-      originalRequest._isRetry = true;
+      originalRequest._isRetry = true
       try {
-        const refreshToken = getCookie('refresh');
+        const refreshToken = getCookie('refresh')
         const response = await axios.post(
           `${API_URL}api/jwt/refresh`,
           {
@@ -41,16 +41,16 @@ $api.interceptors.response.use(
           {
             withCredentials: true,
           }
-        );
-        console.log(response.data.access);
-        setCookie('access', response.data.access);
-        return $api.request(originalRequest);
+        )
+        console.log(response.data.access)
+        setCookie('access', response.data.access)
+        return $api.request(originalRequest)
       } catch (e) {
-        console.error('Error refreshing token:', e);
+        console.error('Error refreshing token:', e)
       }
     }
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
 
-export default $api;
+export default $api

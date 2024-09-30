@@ -161,5 +161,7 @@
   "required_field": "Required field",
   "invalid_email_format": "Invalid email format",
   "set_profile_photo": "Set Profile Photo",
-  "author": "Author"
+  "author": "Author",
+  "search_article": "Search Article",
+  "error.noArticles": "No articles"
 }

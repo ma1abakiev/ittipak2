@@ -26,12 +26,18 @@ export const RecomendationArticlesList = () => {
       </div>
     )
   }
+
   if (isError || !articleData) {
     return <div className="my-20 text-center">{t('error.fetchArticle')}</div>
   }
-  const firstArticle = articleData.data.results[0]
+
+  // Проверяем, если статей нет (пустой массив)
+  if (isSuccess && (!articleData?.data?.results || articleData?.data?.results.length === 0)) {
+    return 
+  }
 
   if (isSuccess) {
+    const firstArticle = articleData?.data?.results[0]
     return (
       <>
         <h2 className="text-center text-4xl mb-10">{t('recomendation')}</h2>
@@ -66,7 +72,7 @@ export const RecomendationArticlesList = () => {
           pauseOnHover={true}
           className="my-5 p-5"
         >
-          {articleData.data.results.map((article, i) => {
+          {articleData?.data?.results.map((article, i) => {
             if (i <= 4 && i > 0) {
               return <RecomendationCard {...article} key={article.id} />
             }
@@ -76,7 +82,6 @@ export const RecomendationArticlesList = () => {
     )
   }
 }
-
 export const RecomendationCard = ({ photo, title, id }) => {
   const { t } = useTranslation()
   return (
